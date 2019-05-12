@@ -40,6 +40,33 @@ function realTimeStockTimeSeries(words){
         });
 }
 
+function forexStockDetails(words){
+    unirest.get(words)
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
+}
+
+function cryptocurrencyStockDetails(words){
+    unirest.get(words)
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
+}
+
+function technicalIndicators(words){
+    unirest.get(words)
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
+}
+
+function sectorPerformances(words){
+    unirest.get(words)
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
+}
 
 
 
