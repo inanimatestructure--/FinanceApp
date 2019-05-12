@@ -41,7 +41,7 @@ unirest.patch('https://apidojo-yahoo-finance-v1.p.rapidapi.com')
   });
    
 /**File uploading **/
-unirest.post('')
+unirest.post('https://apidojo-yahoo-finance-v1.p.rapidapi.com')
     .header("X-RapidAPI-Key", "9a575ef679msh218b48d596f8a39p1edce4jsn9d83480fd74b")
     .header({'Content-Type': 'multipart/form-data'})
     .field('parameter', 'value') // Form field
