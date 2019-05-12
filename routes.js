@@ -32,7 +32,7 @@ readline.question('What stock market data do you want to see?\n1.Summary\n2.Move
  *  **/
 
 function stringAppend(a,b){
-    return Buffer.concat([a,b]);
+    return a + b;
 }
 
 unirest.get(stringAppend(API_HOST,URLS.getSummary))
