@@ -1,25 +1,39 @@
 {
     "stock_real_time_series": 
     {
-        "intraday" : "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&outputsize=compact&apikey=2KZ9MV9TBQDE4YRY"
+        "intraday" : "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&outputsize=compact&apikey=2KZ9MV9TBQDE4YRY",
+        "daily" : "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY",
+        "dailyadjusted" : "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY",
+        "weekly" : "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY",
+        "weeklyadjusted" : "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY",
+        "monthly" : "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY",
+        "monthlyadjusted" : "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY",
+        "searchendpoint" : "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=BA&apikey=demo",
+        "quoteendpoint" : "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY" 
     },
     "forex": 
     {
-
+        "exchangerates" : "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=JPY&apikey=2KZ9MV9TBQDE4YRY",
+        "intraday" : "https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=2KZ9MV9TBQDE4YRY",
+        "daily" : "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&apikey=2KZ9MV9TBQDE4YRY",
+        "weekly" : "https://www.alphavantage.co/query?function=FX_WEEKLY&from_symbol=EUR&to_symbol=USD&apikey=2KZ9MV9TBQDE4YRY", 
+        "monthly" : "https://www.alphavantage.co/query?function=FX_MONTHLY&from_symbol=EUR&to_symbol=USD&apikey=2KZ9MV9TBQDE4YRY"
     },
     "cryptocurrencies" : 
     {
-
+        "exchangerates" : "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=CNY&apikey=2KZ9MV9TBQDE4YRY",
+        "daily" : "https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=CNY&apikey=2KZ9MV9TBQDE4YRY",
+        "weekly" : "https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_WEEKLY&symbol=BTC&market=CNY&apikey=2KZ9MV9TBQDE4YRY",
+        "monthly" : "https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_MONTHLY&symbol=BTC&market=CNY&apikey=2KZ9MV9TBQDE4YRY"
     },
     "technical_indicators" :
     {
-
+        
     },
     "sector_performances" : 
     {
-
+        "sector" : "https://www.alphavantage.co/query?function=SECTOR&apikey=2KZ9MV9TBQDE4YRY"
     }
-   
 }
 
 

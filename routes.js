@@ -8,7 +8,7 @@ console.log(words);
 // Get process.stdin as the standard input object.
 var input = process.stdin;
 input.setEncoding('utf-8');
-console.log("Please input text in command line.");
+console.log("Please input text in command line:");
 
 input.on('data', function (data) {
     if(data === 'exit\n'){
@@ -34,21 +34,6 @@ function stringAppend(a,b){
 
 function realTimeStockTimeSeries(){
     unirest.get("")
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-
-    unirest.get("")
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-
-    unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey="+API_KEY)
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-    
-    unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=compact&apikey="+API_KEY)
         .end(function(result){
             console.log(result.status,result.headers,result.body);
         });
