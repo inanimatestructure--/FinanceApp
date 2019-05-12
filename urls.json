@@ -1,5 +1,25 @@
 {
-    "intraday" : "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&outputsize=compact&apikey=2KZ9MV9TBQDE4YRY"
+    "stock_real_time_series": 
+    {
+        "intraday" : "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&outputsize=compact&apikey=2KZ9MV9TBQDE4YRY"
+    },
+    "forex": 
+    {
+
+    },
+    "cryptocurrencies" : 
+    {
+
+    },
+    "technical_indicators" :
+    {
+
+    },
+    "sector_performances" : 
+    {
+
+    }
+   
 }
 
 

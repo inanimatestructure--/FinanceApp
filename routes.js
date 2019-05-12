@@ -1,10 +1,25 @@
 
 var unirest = require('unirest');
-import * as urls from './urls.json';
-const {name} = urls;
-console.log(name);
+var fs = require('fs');
+var data=fs.readFileSync('urls.json', 'utf8');
+var words=JSON.parse(data);
+console.log(words);
 
-var urlReadIn = prompt("Pick a number between 1 and 100", "");
+// Get process.stdin as the standard input object.
+var input = process.stdin;
+input.setEncoding('utf-8');
+console.log("Please input text in command line.");
+
+input.on('data', function (data) {
+    if(data === 'exit\n'){
+        console.log("User input complete, program exit.");
+        process.exit();
+    }
+    else{
+        console.log('User Input Data : ' + data);
+    }
+});
+
 /**
  * GRAPHING API
  * 
