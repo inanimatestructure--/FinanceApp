@@ -18,8 +18,8 @@ const readline = require('readline').createInterface({
     output: process.stdout
 })
 
-readline.question('What stock market data do you want to see?\n1.Summary\n2.Movers\n3.Quotes\n4.Charts\n5.', (marketData) => {
-    console.log('${ market }');
+readline.question('What stock market data do you want to see?\n1.Summary\n2.Movers\n3.Quotes\n4.Charts\n5.Auto-Complete\n6.Stock Detail\n7.Stock Histories\n8.Stock News', (marketData) => {
+    console.log('${ marketData }');
 });
 
  
@@ -35,7 +35,7 @@ function stringAppend(a,b){
     return Buffer.concat([a,b]);
 }
 
-unirest.get(stringAppend(API_HOST,MARKET_URLS.getSummary))
+unirest.get(stringAppend(API_HOST,URLS.getSummary))
     .header("X-RapidAPI-Host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
     .header("X-RapidAPI-Key", "9a575ef679msh218b48d596f8a39p1edce4jsn9d83480fd74b")
     .end(function(result){
