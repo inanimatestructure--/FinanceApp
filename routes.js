@@ -23,6 +23,8 @@ readline.question('What stock market data do you want to see?\n1.Summary\n2.Move
 });
 
  
+/**require('plotly')(username,api_key);**/
+
 
 /**
  * API KEY: ---->  9a575ef679msh218b48d596f8a39p1edce4jsn9d83480fd74b
