@@ -3,7 +3,7 @@ var unirest = require('unirest');
 var fs = require('fs');
 var data=fs.readFileSync('urls.json', 'utf8');
 var words=JSON.parse(data);
-console.log(words);
+console.log(words.forex.weekly);
 
 // Get process.stdin as the standard input object.
 var input = process.stdin;
@@ -11,12 +11,13 @@ input.setEncoding('utf-8');
 console.log("Please input text in command line:");
 
 input.on('data', function (data) {
-    if(data === 'exit\n'){
+    if(data === 'exit'){
         console.log("User input complete, program exit.");
         process.exit();
     }
     else{
         console.log('User Input Data : ' + data);
+        realTimeStockTimeSeries(words);
     }
 });
 
@@ -32,8 +33,8 @@ function stringAppend(a,b){
     return a + b;
 }
 
-function realTimeStockTimeSeries(){
-    unirest.get("")
+function realTimeStockTimeSeries(words){
+    unirest.get(words)
         .end(function(result){
             console.log(result.status,result.headers,result.body);
         });
