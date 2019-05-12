@@ -1,37 +1,43 @@
 
 var unirest = require('unirest');
-var API_KEY = "2KZ9MV9TBQDE4YRY";
- 
+import * as urls from './urls.json';
+const {name} = urls;
+console.log(name);
+
+var urlReadIn = prompt("Pick a number between 1 and 100", "");
 /**
  * GRAPHING API
  * 
  * require('plotly')(username,api_key);
  * 
+ * API KEY ---> 2KZ9MV9TBQDE4YRY (for me... get your own)
  * **/
 
 function stringAppend(a,b){
     return a + b;
 }
 
-unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=MSFT&apikey="+API_KEY)
-    .end(function(result){
-        console.log(result.status,result.headers,result.body);
-    });
+function realTimeStockTimeSeries(){
+    unirest.get("")
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
 
-unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=MSFT&apikey="+API_KEY)
-    .end(function(result){
-        console.log(result.status,result.headers,result.body);
-    });
+    unirest.get("")
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
 
-unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=MSFT&apikey="+API_KEY)
-    .end(function(result){
-        console.log(result.status,result.headers,result.body);
-    });
-
-unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=MSFT&apikey="+API_KEY)
-    .end(function(result){
-        console.log(result.status,result.headers,result.body);
-    });
+    unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey="+API_KEY)
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
+    
+    unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&outputsize=compact&apikey="+API_KEY)
+        .end(function(result){
+            console.log(result.status,result.headers,result.body);
+        });
+}
 
 
 
