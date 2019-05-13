@@ -1,4 +1,9 @@
-# YahooFinanceApp
-grabbing stock data and inserting it in node.js for now. 
+# StockFinanceApp
+grabbing stock data from Alpha Vantage and inserting it in some web or software format
 
-Make sure you install unirest with this otherwise your routes aren't going to work. Just go into your terminal and write 
+Install NodeJS.
+Install unirest:
+
+` $ npm install unirest `
+
+This will install node_modules in your project repository, The gitignore file will ignore pushing this up.
