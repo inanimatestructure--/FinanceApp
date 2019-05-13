@@ -6,4 +6,4 @@ Install unirest:
 
 ` $ npm install unirest `
 
-This will install node_modules in your project repository, The gitignore file will ignore pushing this up. 
+This will install node_modules in your project repository, The gitignore file will ignore pushing this up.
