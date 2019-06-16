@@ -16,12 +16,12 @@ input.on('data', function (data) {
     }
     else{
         console.log('User Input Data : ' + data);
-        realTimeStockTimeSeries(words);
+        realTimeStockTimeSeries(words); 
     }
 });
 
 /**
- * GRAPHING API
+ * GRAPHING API - MAYBE AT SOME POINT
  * 
  * require('plotly')(username,api_key);
  * 

@@ -1,4 +1,9 @@
 # StockFinanceApp
 grabbing stock data from Alpha Vantage and inserting it in some web or software format
 
-Install nodejs and unirest and a graphing api for nodejs.
+Install NodeJS.
+Install unirest:
+
+` $ npm install unirest `
+
+This will install node_modules in your project repository, The gitignore file will ignore pushing this up.
