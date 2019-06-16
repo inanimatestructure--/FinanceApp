@@ -3,7 +3,6 @@ var unirest = require('unirest');
 var fs = require('fs');
 var data=fs.readFileSync('urls.json', 'utf8');
 var words=JSON.parse(data);
-console.log(words.forex.weekly);
 
 // Get process.stdin as the standard input object.
 var input = process.stdin;
@@ -29,12 +28,11 @@ input.on('data', function (data) {
  * API KEY ---> 2KZ9MV9TBQDE4YRY (for me... get your own)
  * **/
 
-function stringAppend(a,b){
-    return a + b;
-}
 
-function realTimeStockTimeSeries(words){
-    unirest.get(words)
+
+function realTimeStockTimeSeries(words, adata){
+    /**INTRA DAY*/
+    unirest.get(words.stock_real_time_series.daily) 
         .end(function(result){
             console.log(result.status,result.headers,result.body);
         });
