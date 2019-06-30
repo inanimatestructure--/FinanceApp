@@ -5,17 +5,19 @@
   "main": "routes.js",
   "dependencies": {
     "electron": "^5.0.6",
+    "plotly": "^1.0.6",
     "unirest": "^0.6.0"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/inanimatestructure--/StockFinanceApp.git"
   },
-  "author": "Jake Hollis",
+  "author": "jakehollis",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/inanimatestructure--/StockFinanceApp/issues"
