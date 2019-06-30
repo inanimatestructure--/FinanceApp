@@ -11,6 +11,8 @@ Install NodeJS and Electron
  
  ` $ npm install electron --save `
  
+ ` $ npm install plotly `
+ 
 Install unirest:
 
 ` $ npm install unirest `
