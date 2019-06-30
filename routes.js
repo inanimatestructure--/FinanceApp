@@ -1,73 +1,209 @@
-
+var plotly = require('plotly')('jakehollis425','71jKm0ZEjaalP0OfkPV3');
 var unirest = require('unirest');
-var fs = require('fs');
-var data=fs.readFileSync('urls.json', 'utf8');
-var words=JSON.parse(data);
-console.log(words.forex.weekly);
+const electron = require('electron');
+const url = require('url');
+const path = require('path');
 
-// Get process.stdin as the standard input object.
-var input = process.stdin;
-input.setEncoding('utf-8');
-console.log("Please input text in command line:");
+const {app, BrowserWindow, Menu} = electron;
 
-input.on('data', function (data) {
-    if(data === 'exit'){
-        console.log("User input complete, program exit.");
-        process.exit();
-    }
-    else{
-        console.log('User Input Data : ' + data);
-        realTimeStockTimeSeries(words); 
-    }
+let main;
+
+// LISTEN FOR APP TO BE READY
+app.on('ready', function(){
+    //CREATE NEW WINDOW 
+    main = new BrowserWindow({});
+    // LOAD HTML INTO WINDOW
+
+    main.loadURL(url.format({
+        pathname: path.join(__dirname, 'main.html'),
+        protocol:'file:',
+        slashes: true
+    }));
+
+    // BUILD MENU FROM TEMPLATE
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+
+    // INSERT MENU
+    Menu.setApplicationMenu(mainMenu);
+
 });
 
-/**
- * GRAPHING API - MAYBE AT SOME POINT
- * 
- * require('plotly')(username,api_key);
- * 
- * API KEY ---> 2KZ9MV9TBQDE4YRY (for me... get your own)
- * **/
+const mainMenuTemplate = [
+    {
+        label: 'Menu',
+        submenu: [
+            {
+                label: 'Stocks',
+                click(){
 
-function stringAppend(a,b){
-    return a + b;
-}
+                }
+            },
+            {
+                label: 'Forex',
+                click(){
 
-function realTimeStockTimeSeries(words){
-    unirest.get(words)
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-}
+                }
+            },
+            {
+                label: 'Cryptocurrency',
+                click(){
 
-function forexStockDetails(words){
-    unirest.get(words)
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-}
+                }
+            },
+            {   
+                label: 'Quit',
+                click(){
+                    app.quit();
+                }
+            }
+        ]
+    }
+];
 
-function cryptocurrencyStockDetails(words){
-    unirest.get(words)
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-}
+/***I'LL  FIND SOME USE FOR THIS LATER ***/
+// var data=fs.readFileSync('urls.json', 'utf8');
+// var words=JSON.parse(data);
 
-function technicalIndicators(words){
-    unirest.get(words)
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-}
+// Get process.stdin as the standard input object.
 
-function sectorPerformances(words){
-    unirest.get(words)
-        .end(function(result){
-            console.log(result.status,result.headers,result.body);
-        });
-}
 
+
+// var readline = process.stdin;
+// readline.setEncoding('utf-8');
+
+// console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+
+// readline.on('data', function (data) {
+//     if(data == 0){ 
+//         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&outputsize=compact&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 1){ 
+//         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 2){ 
+//         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 3){ 
+//         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 4){ 
+//         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             }); 
+//     }
+//     if(data == 5){ 
+//         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 6){ 
+//         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 7){ 
+//         unirest.get("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=BA&apikey=demo") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             }); 
+//     }
+//     if(data == 8){ 
+//         unirest.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 9){  
+//         unirest.get("https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=JPY&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }  
+//     if(data == 10){ 
+//         unirest.get("https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=5min&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 11){ 
+//         unirest.get("https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 12){ 
+//         unirest.get("https://www.alphavantage.co/query?function=FX_WEEKLY&from_symbol=EUR&to_symbol=USD&apikey=2KZ9MV9TBQDE4YRY") 
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             }); 
+//     }
+//     if(data == 13){ 
+//         unirest.get("https://www.alphavantage.co/query?function=FX_MONTHLY&from_symbol=EUR&to_symbol=USD&apikey=2KZ9MV9TBQDE4YRY")
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 14){
+//         unirest.get("https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=CAD&apikey=2KZ9MV9TBQDE4YRY")
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 15){
+//         unirest.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=CAD&apikey=2KZ9MV9TBQDE4YRY")
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 16){
+//         unirest.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_WEEKLY&symbol=BTC&market=CAD&apikey=2KZ9MV9TBQDE4YRY")
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 17){
+//         unirest.get("https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_MONTHLY&symbol=BTC&market=CAD&apikey=2KZ9MV9TBQDE4YRY")
+//             .end(function(result){
+//                 console.log(result.status,result.headers,result.body);
+//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
+//             });
+//     }
+//     if(data == 18){
+//         process.exit();
+//     }
+// });
 
 
 // unirest.post('https://apidojo-yahoo-finance-v1.p.rapidapi.com/')
