@@ -1,5 +1,8 @@
 
+
+var plotly = require('plotly')('jakehollis425','71jKm0ZEjaalP0OfkPV3');
 var unirest = require('unirest');
+
 /***I'LL  FIND SOME USE FOR THIS LATER ***/
 // var data=fs.readFileSync('urls.json', 'utf8');
 // var words=JSON.parse(data);
