@@ -4,8 +4,11 @@ grabbing stock data from Alpha Vantage and inserting it in some web or software 
 Install NodeJS and Electron
   
  ` $ npm install `
+ 
  ` $ npm install nodejs `  
+ 
  ` $ npm install -g electron `
+ 
  ` $ npm install electron --save `
  
 Install unirest:
