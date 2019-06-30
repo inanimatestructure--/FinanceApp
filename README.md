@@ -1,7 +1,7 @@
 # StockFinanceApp
 grabbing stock data from Alpha Vantage and inserting it in some web or software format
 
-Install NodeJS.
+Install NodeJS, electron and plotly
 Install unirest:
 
 ` $ npm init `
