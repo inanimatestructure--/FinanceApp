@@ -1,4 +1,4 @@
-var plotly = require('plotly')('jakehollis425','71jKm0ZEjaalP0OfkPV3');
+var plotly = require('plotly')("jakehollis425","71jKm0ZEjaalP0OfkPV3");
 var unirest = require('unirest');
 const electron = require('electron');
 const url = require('url');
@@ -67,7 +67,7 @@ function cryptocurrencyMonthlyWindow(){
     });
 
     cryptocurrencyMonthly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/cryptocurrency/monthly.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -82,7 +82,7 @@ function cryptocurrencyWeeklyWindow(){
     });
 
     cryptocurrencyWeekly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/cryptocurrency/weekly.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -97,7 +97,7 @@ function cryptocurrencyExchangeWindow(){
     });
 
     cryptocurrencyExchange.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/cryptocurrency/exchange.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -112,7 +112,7 @@ function cryptocurrencyDailyWindow(){
     });
 
     cryptocurrencyDaily.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/cryptocurrency/daily.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -129,7 +129,7 @@ function forexMonthlyWindow(){
     });
 
     forexMonthly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/forex/monthly.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -144,7 +144,7 @@ function forexWeeklyWindow(){
     });
 
     forexWeekly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/forex/weekly.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -159,7 +159,7 @@ function forexIntraDayWindow(){
     });
 
     forexIntraDay.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/forex/intraday.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -174,7 +174,7 @@ function forexDailyWindow(){
     });
 
     forexDaily.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/intraday.html'),
+        pathname: path.join(__dirname, 'html/forex/daily.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -341,6 +341,8 @@ function stockIntraDayWindow(){
     }));
 
 }
+
+/**Main Menu Template for the app */
 
 const mainMenuTemplate = [
     {
