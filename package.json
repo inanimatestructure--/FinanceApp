@@ -2,7 +2,7 @@
   "name": "jake",
   "version": "1.0.0",
   "description": "grabbing stock data from Alpha Vantage and inserting it in some web or software format",
-  "main": "routes.js",
+  "main": "app.js",
   "dependencies": {
     "electron": "^5.0.6",
     "plotly": "^1.0.6",
