@@ -8,7 +8,6 @@ const {app, BrowserWindow, Menu} = electron;
 
 let main
 
-
 let stockIntraday
 let stockDaily
 let stockDailyAdjusted
