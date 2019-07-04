@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Document </title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title> Monthly Market Stats - Cryptocurrency </title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".monthlyCrypto").load('common.html');
+        });
+    </script>
 </head>
 <body>
-    <h1> Hi template </h1>
-    <label for="cryptomonthly">Symbol</label> 
-    <select class="symbolSearchList"></select>
-    
+    <h1>Monthly Stats - Cryptocurrency</h1>
+    <div class="monthlyCrypto"></div>
 </body>
 </html>
