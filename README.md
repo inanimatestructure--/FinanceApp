@@ -10,3 +10,4 @@ Install NodeJS, electron and plotly and unirest
 ` $ npm install plotly `
 
 This will install node_modules in your project repository, The gitignore file will ignore pushing this up.
+

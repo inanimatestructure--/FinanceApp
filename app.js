@@ -118,7 +118,21 @@ function cryptocurrencyDailyWindow(){
     }));
 }
 
+function forexCurrencyExchangeWindow(){
+    forexCurrencyExchange = new BrowserWindow({      
+        width: 500,
+        height: 500,
+        title: 'Intraday Stocks',
+        parent: main
+    });
 
+    forexCurrencyExchange.loadURL(url.format({
+        pathname: path.join(__dirname, 'html/forex/currencyexchange.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+
+}
 
 function forexMonthlyWindow(){
     forexMonthly = new BrowserWindow({      
@@ -208,22 +222,6 @@ function stockSymbolSearchWindow(){
 
     stockSymbolSearch.loadURL(url.format({
         pathname: path.join(__dirname, 'html/stocks/symbolsearch.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockCurrencyExchangeWindow(){
-    stockCurrencyExchange = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockCurrencyExchange.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/currencyexchange.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -391,12 +389,6 @@ const mainMenuTemplate = [
                 }
             }, 
             {
-                label: 'Currency Exchange Rate',
-                click(){
-                    stockCurrencyExchangeWindow();
-                }
-            },
-            {
                 label: 'Symbol Search',
                 click(){
                     stockSymbolSearchWindow();
@@ -429,6 +421,12 @@ const mainMenuTemplate = [
                 label: 'Weekly',
                 click(){
                     forexWeeklyWindow();
+                }
+            },
+            {
+                label: 'Currency Exchange Rate',
+                click(){
+                    forexCurrencyExchangeWindow();
                 }
             },
             {
