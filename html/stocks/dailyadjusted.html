@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Document </title>
+    <title> Daily Adjusted Market Stats - Stocks</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".dailyAdjustedStocks").load('common.html');
+        });
+    </script>
 </head>
 <body>
-    <h1> Hi template </h1>
+    <h1> Daily Adjusted Stats - Stocks</h1>
+    <div class="dailyAdjustedStocks"></div>
 </body>
 </html>

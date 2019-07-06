@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Intraday Stocks </title>
+    <title> Intraday Stats - Stocks </title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".intradayStocks").load('common.html');
+        });
+    </script>
 </head>
 <body>
-    <h1> Intraday Stocks </h1>
+    <h1> Intraday Stats - Stocks </h1>
+    <div class="intradayStocks"></div>
 </body>
 </html>
