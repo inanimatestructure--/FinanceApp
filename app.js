@@ -7,27 +7,10 @@ const path = require('path');
 const {app, BrowserWindow, Menu} = electron;
 
 let main
+let stock
+let forex
+let cryptocurrency
 
-let stockIntraday
-let stockDaily
-let stockDailyAdjusted
-let stockWeekly
-let stockWeeklyAdjusted
-let stockMonthly
-let stockMonthlyAdjusted
-let stockCurrencyExchange
-let stockSymbolSearch
-let stockGlobalQuotes
-
-let forexDaily
-let forexIntraDay
-let forexMonthly
-let forexWeekly
-
-let cryptocurrencyDaily
-let cryptocurrencyExchange
-let cryptocurrencyMonthly
-let cryptocurrencyWeekly
 
 // LISTEN FOR APP TO BE READY
 app.on('ready', function(){
@@ -58,282 +41,50 @@ app.on('ready', function(){
  * 
  * */
 
-function cryptocurrencyMonthlyWindow(){
-    cryptocurrencyMonthly = new BrowserWindow({      
+function cryptocurrencyWindow(){
+    cryptocurrency = new BrowserWindow({      
         width: 500,
         height: 500,
-        title: 'Intraday Stocks',
+        autoHideMenuBar: true,
+        title: 'Cryptocurrency',
         parent: main
     });
 
-    cryptocurrencyMonthly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/cryptocurrency/monthly.html'),
+    cryptocurrency.loadURL(url.format({
+        pathname: path.join(__dirname, 'html/cryptocurrency.html'),
         protocol: 'file:',
         slashes: true
     }));
 }
 
-function cryptocurrencyWeeklyWindow(){
-    cryptocurrencyWeekly = new BrowserWindow({      
+function forexWindow(){
+    forex = new BrowserWindow({      
         width: 500,
         height: 500,
-        title: 'Intraday Stocks',
+        autoHideMenuBar: true,
+        title: 'Forex',
         parent: main
     });
 
-    cryptocurrencyWeekly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/cryptocurrency/weekly.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-}
-
-function cryptocurrencyExchangeWindow(){
-    cryptocurrencyExchange = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    cryptocurrencyExchange.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/cryptocurrency/exchange.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-}
-
-function cryptocurrencyDailyWindow(){
-    cryptocurrencyDaily = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    cryptocurrencyDaily.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/cryptocurrency/daily.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-}
-
-function forexCurrencyExchangeWindow(){
-    forexCurrencyExchange = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    forexCurrencyExchange.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/forex/currencyexchange.html'),
+    forex.loadURL(url.format({
+        pathname: path.join(__dirname, 'html/forex.html'),
         protocol: 'file:',
         slashes: true
     }));
 
 }
 
-function forexMonthlyWindow(){
-    forexMonthly = new BrowserWindow({      
+function stockWindow(){
+    stock = new BrowserWindow({      
         width: 500,
         height: 500,
-        title: 'Intraday Stocks',
+        autoHideMenuBar: true,
+        title: 'Stocks',
         parent: main
     });
 
-    forexMonthly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/forex/monthly.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-}
-
-function forexWeeklyWindow(){
-    forexWeekly = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    forexWeekly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/forex/weekly.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-}
-
-function forexIntraDayWindow(){
-    forexIntraDay = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    forexIntraDay.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/forex/intraday.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-}
-
-function forexDailyWindow(){
-    forexDaily = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    forexDaily.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/forex/daily.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-}
-
-
-
-function stockGlobalQuotesWindow(){
-    stockGlobalQuotes = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockGlobalQuotes.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/globalquotes.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockSymbolSearchWindow(){
-    stockSymbolSearch = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockSymbolSearch.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/symbolsearch.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockMonthlyAdjustedWindow(){
-    stockMonthlyAdjusted = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockMonthlyAdjusted.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/monthlyadjusted.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockMonthlyWindow(){
-    stockMonthly = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockMonthly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/monthly.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockWeeklyAdjustedWindow(){
-    stockWeeklyAdjusted = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockWeeklyAdjusted.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/weeklyadjusted.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockWeeklyWindow(){
-    stockWeekly = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockWeekly.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/weekly.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockDailyAdjustedWindow(){
-    stockDailyAdjusted = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockDailyAdjusted.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/dailyadjusted.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockDailyWindow(){
-    stockDaily = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockDaily.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/daily.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-}
-
-function stockIntraDayWindow(){
-    stockIntraday = new BrowserWindow({      
-        width: 500,
-        height: 500,
-        title: 'Intraday Stocks',
-        parent: main
-    });
-
-    stockIntraday.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/stocks/intraday.html'),
+    stock.loadURL(url.format({
+        pathname: path.join(__dirname, 'html/stocks.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -344,126 +95,26 @@ function stockIntraDayWindow(){
 
 const mainMenuTemplate = [
     {
-        label: 'Stocks',
+        label: 'Menu',
         submenu: [
             {
-                label: 'Intraday',
+                label: 'Stocks',
                 click(){
-                    stockIntraDayWindow();
+                    stockWindow();
                 }
             },
             {
-                label: 'Daily',
+                label: 'Forex',
                 click(){
-                    stockDailyWindow();
+                    forexWindow();
                 }
             },
             {
-                label: 'Daily Adjusted',
+                label: 'Cryptocurrency',
                 click(){
-                    stockDailyAdjustedWindow();
-                }
-            },
-            {
-                label: 'Weekly',
-                click(){
-                    stockWeeklyWindow();
-                }
-            },
-            {
-                label: 'Weekly Adjusted',
-                click(){
-                    stockWeeklyAdjustedWindow();
-                }
-            },
-            {
-                label: 'Monthly',
-                click(){
-                    stockMonthlyWindow();
-                }  
-            },
-            {
-                label: 'Monthly Adjusted',
-                click(){
-                    stockMonthlyAdjustedWindow();
-                }
-            }, 
-            {
-                label: 'Symbol Search',
-                click(){
-                    stockSymbolSearchWindow();
-                }
-            },
-            {
-                label: 'Global Quotes',
-                click(){
-                    stockGlobalQuotesWindow();
+                    cryptocurrencyWindow();
                 }
             }
-        ]
-    },
-    {
-        label: 'Forex',
-        submenu: [
-            {
-                label: 'Intraday',
-                click(){
-                    forexIntraDayWindow();
-                }
-            },
-            {
-                label: 'Daily',
-                click(){
-                    forexDailyWindow();
-                }
-            },
-            {
-                label: 'Weekly',
-                click(){
-                    forexWeeklyWindow();
-                }
-            },
-            {
-                label: 'Currency Exchange Rate',
-                click(){
-                    forexCurrencyExchangeWindow();
-                }
-            },
-            {
-                label: 'Monthly',
-                click(){
-                    forexMonthlyWindow();
-                }  
-            },
-        ]
-    },
-    {
-        label: 'Cryptocurrency',
-        submenu: [
-            {
-                label: 'Currency Exchange Rate',
-                click(){
-                    cryptocurrencyExchangeWindow();
-                }
-            },
-            {
-                label: 'Digital Currency Daily',
-                click(){
-                    cryptocurrencyDailyWindow();
-                }
-            },
-            {
-                label: 'Digitial Currency Weekly',
-                click(){
-                    cryptocurrencyWeeklyWindow();
-                }
-             },
-             {
-                label: 'Digital Currency Monthly',
-                click(){
-                    cryptocurrencyMonthlyWindow();
-                }
-             },
         ]
     },
     {
