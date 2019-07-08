@@ -182,7 +182,6 @@ const mainMenuTemplate = [
 //         unirest.get("https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=MSFT&apikey=2KZ9MV9TBQDE4YRY") 
 //             .end(function(result){
 //                 console.log(result.status,result.headers,result.body);
-//                 console.log("Stocks (0-9), \nForex (10-13) \nCryptocurrencies (14-17) \nPress 18 to exit:");
 //             }); 
 //     }
 //     if(data == 5){ 
