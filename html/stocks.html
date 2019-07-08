@@ -8,17 +8,19 @@
 <body>
     <div class="DIGITAL_CURRENCY">
         <label for="function">Function: </label>
-        <select class="stockFunction">
-            <option value="TIME_SERIES_INTRADAY">Intraday</option>
-            <option value="TIME_SERIES_DAILY">Daily</option>
-            <option value="TIME_SERIES_WEEKLY">Weekly</option>
-            <option value="TIME_SERIES_MONTHLY">Monthly</option>
-            <option value="TIME_SERIES_DAILY_ADJUSTED">Daily Adjusted</option>
-            <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Adjusted</option>
-            <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Adjusted</option>
-            <option value="GLOBAL_QUOTES">Global Quotes</option>
-            <option value="SYMBOL_SEARCH">Symbol Search</option>
-        </select></br>
+        <div class="form-group">
+            <select class="form-control" id="stockFunction">
+                <option value="TIME_SERIES_INTRADAY">Intraday</option>
+                <option value="TIME_SERIES_DAILY">Daily</option>
+                <option value="TIME_SERIES_WEEKLY">Weekly</option>
+                <option value="TIME_SERIES_MONTHLY">Monthly</option>
+                <option value="TIME_SERIES_DAILY_ADJUSTED">Daily Adjusted</option>
+                <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Adjusted</option>
+                <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Adjusted</option>
+                <option value="GLOBAL_QUOTES">Global Quotes</option>
+                <option value="SYMBOL_SEARCH">Symbol Search</option>
+            </select>
+        </div></br>
         <label for="symbolSearchLabel">Symbol Search: </label>
         <select class="symbolSearchList"></select></br>
         <label for="market">Currency Code: </label>

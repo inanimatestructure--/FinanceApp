@@ -1,5 +1,4 @@
 var plotly = require('plotly')("jakehollis425","71jKm0ZEjaalP0OfkPV3");
-var unirest = require('unirest');
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
