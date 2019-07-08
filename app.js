@@ -11,13 +11,12 @@ let stock
 let forex
 let cryptocurrency
 
-
 // LISTEN FOR APP TO BE READY
 app.on('ready', function(){
     //CREATE NEW WINDOW 
     main = new BrowserWindow({
         width: 1250,
-        height: 900
+        height: 1000
     });
     // LOAD HTML INTO WINDOW
 
@@ -26,6 +25,8 @@ app.on('ready', function(){
         protocol:'file:',
         slashes: true
     }));
+
+    main.webContents.openDevTools();
 
     // BUILD MENU FROM TEMPLATE
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -55,6 +56,9 @@ function cryptocurrencyWindow(){
         protocol: 'file:',
         slashes: true
     }));
+
+    cryptocurrency.webContents.openDevTools();
+
 }
 
 function forexWindow(){
@@ -72,11 +76,13 @@ function forexWindow(){
         slashes: true
     }));
 
+    forex.webContents.openDevTools();
+
 }
 
 function stockWindow(){
     stock = new BrowserWindow({      
-        width: 500,
+        width: 500, 
         height: 500,
         autoHideMenuBar: true,
         title: 'Stocks',
@@ -88,6 +94,8 @@ function stockWindow(){
         protocol: 'file:',
         slashes: true
     }));
+
+    stock.webContents.openDevTools();
 
 }
 
