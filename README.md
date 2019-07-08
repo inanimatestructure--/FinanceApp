@@ -2,11 +2,9 @@
 grabbing stock data from Alpha Vantage and inserting it in some web or software format
 
 Install NodeJS.
-Install electron, plotly, unirest.
+Install electron, plotly.
 
 ` $ npm init `
-
-` $ npm install unirest `
 
 ` $ npm install -g electron `
 
