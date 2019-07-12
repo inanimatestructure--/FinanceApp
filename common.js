@@ -14,6 +14,6 @@ function init(){
     $("#cryptocurrencyFunction").on("change", function(){
         console.log($(this).val());
     });
-}
+} 
 
 
