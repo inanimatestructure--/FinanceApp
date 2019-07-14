@@ -6,30 +6,43 @@
     <script type="text/javascript" src="../common.js"></script>
 </head>
 <body>
-    <div class="DIGITAL_CURRENCY">
-        <label for="function">Function: </label>
+    <div class="TIME_SERIES">
         <div class="form-group">
-            <select class="form-control" id="stockFunction">
-                <option value="TIME_SERIES_INTRADAY">Intraday</option>
-                <option value="TIME_SERIES_DAILY">Daily</option>
-                <option value="TIME_SERIES_WEEKLY">Weekly</option>
-                <option value="TIME_SERIES_MONTHLY">Monthly</option>
-                <option value="TIME_SERIES_DAILY_ADJUSTED">Daily Adjusted</option>
-                <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Adjusted</option>
-                <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Adjusted</option>
-                <option value="GLOBAL_QUOTES">Global Quotes</option>
-                <option value="SYMBOL_SEARCH">Symbol Search</option>
-            </select>
-        </div></br>
-        <label for="symbolSearchLabel">Symbol Search: </label>
-        <select class="symbolSearchList"></select></br>
-        <label for="market">Currency Code: </label>
-        <input type="text" class="marketCurrencyCode"></input></br>
-        <label for="from">From: </label>
-        <input type="text" class="fromCurrencyExchange"/></br>
-        <label for="to">To: </label>
-        <input type="text" class="toCurrencyExchange"/></br>
-        <input type="button" class="submit" value="Submit"></input>
+            <div id="functions">
+                <label for="function">Function: </label>
+                <select class="form-control" id="stockFunction">
+                    <option value="TIME_SERIES_INTRADAY">Intraday</option>
+                    <option value="TIME_SERIES_DAILY">Daily</option>
+                    <option value="TIME_SERIES_WEEKLY">Weekly</option>
+                    <option value="TIME_SERIES_MONTHLY">Monthly</option>
+                    <option value="TIME_SERIES_DAILY_ADJUSTED">Daily Adjusted</option>
+                    <option value="TIME_SERIES_WEEKLY_ADJUSTED">Weekly Adjusted</option>
+                    <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Adjusted</option>
+                    <option value="GLOBAL_QUOTES">Global Quotes</option>
+                </select>
+            </div></br>
+            <div id="divKeywords">
+                <label for="symbolKeyboard">Keyword: </label>
+                <input type="text" class="keywords"/> 
+                <input type="button" class="keywordsearch" value="Search"/>
+            </div></br>
+            <div id="symbols">
+                <label for="symbolSearchLabel">Symbol Search: </label>
+                <select class="symbolSearchList"></select></br>
+            </div></br>
+            <div id="outputsize"> 
+                <label for="from">Output Size: </label>
+                <select class="outputsizeList">
+                    <option value="compact">Compact</option>
+                    <option value="full">Full</option>
+                </select>
+            </div></br>
+            <div id="interval">
+                <label for="to">Interval: </label>
+                <input type="text" class="intervalStocks"/>
+            </div></br>
+            <input type="button" class="submit" value="Submit"></input>
+        </div>
     </div>
 </body>
 </html>
