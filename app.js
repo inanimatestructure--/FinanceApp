@@ -102,28 +102,20 @@ const mainMenuTemplate = [
         submenu: [
             {
                 label: 'Stocks',
-                click(){
-                    stockWindow();
-                }
+                click(){ stockWindow(); }
             },
             {
                 label: 'Forex',
-                click(){
-                    forexWindow();
-                }
+                click(){ forexWindow(); }
             },
             {
                 label: 'Cryptocurrency',
-                click(){
-                    cryptocurrencyWindow();
-                }
+                click(){ cryptocurrencyWindow(); }
             }
         ]
     },
     {
         label: 'Quit',
-        click(){
-            app.quit();
-        }
+        click(){ app.quit(); }
     }
 ];
