@@ -1,7 +1,7 @@
 # StockFinanceApp
-grabbing stock data from Alpha Vantage and inserting it in some web or software format
-
+Grabs stock data from Alpha Vantage and inserting it in an electron app.
 Install NodeJS.
+
 Install electron, plotly.
 
 ` $ npm init `
