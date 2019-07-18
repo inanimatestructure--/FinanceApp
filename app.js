@@ -1,4 +1,6 @@
-var plotly = require('plotly')("jakehollis425","71jKm0ZEjaalP0OfkPV3");
+const plotlycred = require('./config.json');
+
+var plotly = require('plotly')(plotlycred.plotlyuser,plotlycred.plotlykey);
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
