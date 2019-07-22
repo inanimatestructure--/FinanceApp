@@ -30,16 +30,28 @@
                 <label for="symbolSearchLabel">Symbol Search: </label>
                 <select class="symbolSearchList"></select></br>
             </div></br>
+            <div id="datatype">
+                <select class="form-control" id="datatypeObject">
+                    <option value="json">JSON</option>
+                    <option value="csv">CSV</option>
+                </select>
+            </div>
             <div id="outputsize"> 
                 <label for="from">Output Size: </label>
-                <select class="outputsizeList">
+                <select class="form-control" id="outputsizeList">
                     <option value="compact">Compact</option>
                     <option value="full">Full</option>
                 </select>
             </div></br>
             <div id="interval">
                 <label for="to">Interval: </label>
-                <input type="text" class="intervalStocks"/>
+                <select class="form-control" id="intervalStocks">
+                    <option value="1min">1 min</option>
+                    <option value="5min">5 min</option>
+                    <option value="15min">15 min</option>
+                    <option value="30min">30 min</option>
+                    <option value="60min">60 min</option>
+                </select>
             </div></br>
             <input type="button" class="submit" value="Submit"></input>
         </div>
