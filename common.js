@@ -1,31 +1,53 @@
-$(document).ready(function(){
-    init();
+var config = "";
 
+$(document).ready(function(){
+    timeseries();
+    //forex();
+    //cryptocurrency();
 });
 
-function init(){
+function forex(){
+   var forex = new Object();
+   forex.function = $('#forexFunction').val();
+    
+   $("#forexFunction").on("change", function(){
+        forex.function = $(this).val();
+   });
+   
+}
 
+function cryptocurrency(){
+    var cryptocurrency = new Object();
+    cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+    $("#cryptocurrencyFunction").on("change", function(){
+        cryptocurrency.function = $(this).val();
+    });
+}
+
+function timeseries(){
+
+    var time_series = new Object();
+    
     $('#symbols').hide();
 
-    var apikey = 'demo'; /**CHANGE THIS TO WHATEVER YOUR KEY IS */
-    var time_series = new Object();
-    var forex = new Object();
-    var config = "";
+    time_series.datatype = $("#datatypeObject").val();  
+    time_series.interval = $("#intervalStocks").val();
+    time_series.datatype = $("#datatypeObject").val();
+    time_series.datatype = $("#outputsizeList").val();
 
     $.getJSON("../config.json", function(data){
         config = data.alphakey;
     });
-    
-    var cryptocurrency = new Object();
+   
     var alphaStartUrl = "https://www.alphavantage.co/query?";
     
     var apikey = config.alphakey;
+   
+    var symbolSearchUrl = "";
+    var mainTimeSeriesURL = "";
 
     time_series.function = $('#stockFunction').val();
-
-    forex.function = $('#forexFunction').val();
-    cryptocurrency.function = $('#cryptocurrencyFunction').val();
-
+    
     if($('.keywords').is(':empty')){
         $('.keywordsearch').attr("disabled", true);
     }
@@ -34,16 +56,29 @@ function init(){
         time_series.function = $(this).val();
     });
 
-    $('.keywords').change(function(data){
+    $('#intervalStocks').change(function(){
+        time_series.interval = $(this).val();
+    });
+
+    $('#datatypeObject').change(function(){
+        time_series.datatype = $(this).val();
+    });
+
+    $('#outputsizeList').change(function(){
+        time_series.outputsize = $(this).val();
+    });
+
+    $('.keywords').change(function(){
         $('.keywordsearch').removeAttr("disabled");
     });
+
 
     $('.keywordsearch').click(function(e){
         $('.symbolSearchList').empty();
         $('#symbols').show();
         time_series.keyword = $('.keywords').val();
        
-        var symSearchUrl = alphaStartUrl + "function=SYMBOL_SEARCH&keywords=" + time_series.keyword + "&apikey=" + config
+        symSearchUrl = alphaStartUrl + "function=SYMBOL_SEARCH&keywords=" + time_series.keyword + "&apikey=" + config
        
         $.get(symSearchUrl,function(data){
             for(var i=0; i < data.bestMatches.length; i++){
@@ -57,29 +92,21 @@ function init(){
         time_series.symbol = symbolSearch;
         forex.symbol = symbolSearch;
         cryptocurrency.symbol = symbolSearch; 
-
     });
 
-    $.get(alphaStartUrl + "function=" + time_series.function + "&symbol" + time_series.symbol + "&apikey=" + apikey,function(data){
-
-    });
-
-    $.get("https://www.alphavantage.co/query?function=",function(data){
-        
-    });
-
-    $.get("https://www.alphavantage.co/query?function=",function(data){
-
-    });
-
-    $("#forexFunction").on("change", function(){
-        forex.function = $(this).val();
-    });
-
-    $("#cryptocurrencyFunction").on("change", function(){
-        cryptocurrency.function = $(this).val();
-    });
+    $(".submit").click(function(e){
+        if($("#stockFunction").val() == "TIME_SERIES_INTRADAY"){
+            mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol" + time_series.symbol + "&interval=" + time_series.interval + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + apikey;
+        }
+        else if($("#stockFunction").val() == "TIME_SERIES_DAILY" || $("#stockFunction").val() == "TIME_SERIES_DAILY_ADJUSTED"){
+            mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol" + time_series.symbol + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + apikey;
+        }
+        else{
+            mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + apikey;
+        }
+        $.get(mainTimeSeriesURL ,function(data){
+            console.log(data);
+        });
+    });    
 
 } 
-
-
