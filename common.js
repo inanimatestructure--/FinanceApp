@@ -1,16 +1,5 @@
 var config = "";
 
-const { ipcRenderer } = require('electron');
-
-var showName = $('#showName').val();
-
-ipcRenderer.on('forWin2', function (event, arg){
-    console.log(arg);
-    showName.innerHTML = arg;
-});
-
-console.log("I'm Window2");
-
 $(document).ready(function(){
     timeseriesScreen();
     //forex();
