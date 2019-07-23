@@ -1,6 +1,6 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
-let name = $('#name');
+let name = $('#name').val();
 
 var divHandler = $('#graphDiv').val(); 
 $('#graphDiv').click( function(event){
