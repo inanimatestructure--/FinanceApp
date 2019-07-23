@@ -22,7 +22,7 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
  It (should) installs node_modules in your directory which will be ignored by the gitignore file when you push it up (which is why it doesn't show up in master or my branch). Npm is part of the node_modules which will allow you to install the following below:
 
- Electron and Plotly:
+ Electron:
 
 ` $ npm init ` - this is if you want to create a new package.json file and delete the previous one.
 
@@ -30,7 +30,7 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
 ` $ npm install electron --save `
 
-` $ npm install plotly `
+Plotly will just be used in a script tag from CDN.
 
 We're also using the jquery min file off cloudflare in the script tags and Tensorflow's API which I don't have yet but will at some point once the wrapper idea is complete. Happy coding. 
 
