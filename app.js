@@ -1,9 +1,7 @@
-const plotlycred = require('./config.json');
-
-var plotly = require('plotly')(plotlycred.plotlyuser,plotlycred.plotlykey);
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+const remote = require('electron').remote;
 
 const {app, BrowserWindow, Menu} = electron;
 
@@ -16,8 +14,8 @@ let cryptocurrency
 app.on('ready', function(){
     //CREATE NEW WINDOW 
     main = new BrowserWindow({
-        width: 1250,
-        height: 1000
+        width: 1200,
+        height: 1200
     });
     // LOAD HTML INTO WINDOW
 
@@ -41,8 +39,8 @@ app.on('ready', function(){
 
 function cryptocurrencyWindow(){
     cryptocurrency = new BrowserWindow({      
-        width: 500,
-        height: 500,
+        width: 1200,
+        height: 1200,
         autoHideMenuBar: true,
         title: 'Cryptocurrency',
         parent: main
@@ -60,8 +58,8 @@ function cryptocurrencyWindow(){
 
 function forexWindow(){
     forex = new BrowserWindow({      
-        width: 500,
-        height: 500,
+        width: 1200,
+        height: 1200,
         autoHideMenuBar: true,
         title: 'Forex',
         parent: main
@@ -79,8 +77,8 @@ function forexWindow(){
 
 function stockWindow(){
     stock = new BrowserWindow({      
-        width: 500, 
-        height: 500,
+        width: 1200, 
+        height: 1200,
         autoHideMenuBar: true,
         title: 'Stocks',
         parent: main
@@ -104,7 +102,9 @@ const mainMenuTemplate = [
         submenu: [
             {
                 label: 'Stocks',
-                click(){ stockWindow(); }
+                click(){ 
+                    stockWindow();
+                }
             },
             {
                 label: 'Forex',

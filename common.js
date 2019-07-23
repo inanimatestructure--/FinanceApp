@@ -1,33 +1,28 @@
 var config = "";
 
 $(document).ready(function(){
-    timeseries();
+    timeseriesScreen();
     //forex();
     //cryptocurrency();
 });
 
-function mainScreen(data){
-    console.log(data);
-}
-
-function forex(){
-   var forex = new Object();
-   forex.function = $('#forexFunction').val();
+function forexScreen(){
+   var Forex = new Object();
+   Forex.function = $('#forexFunction').val();
    $("#forexFunction").on("change", function(){
-        forex.function = $(this).val();
+        Forex.function = $(this).val();
    });
-   
 }
 
-function cryptocurrency(){
-    var cryptocurrency = new Object();
-    cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+function cryptocurrencyScreen(){
+    var Cryptocurrency = new Object();
+    Cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
     $("#cryptocurrencyFunction").on("change", function(){
-        cryptocurrency.function = $(this).val();
+        Cryptocurrency.function = $(this).val();
     });
 }
 
-function timeseries(){
+function timeseriesScreen(){
 
     var time_series = new Object();
     
@@ -39,9 +34,8 @@ function timeseries(){
     time_series.datatype = $("#dtObject").val();
     time_series.outputsize = $("#outputsizeList").val();
 
-    $.getJSON("../config.json", function(data){
+    $.getJSON("../alphakey.json", function(data){
         config = data.alphakey;
-        console.log(config);
     });
    
     var alphaStartUrl = "https://www.alphavantage.co/query?";
@@ -105,7 +99,15 @@ function timeseries(){
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
         $.get(mainTimeSeriesURL ,function(data){
-            mainScreen(data);
+            var data2 = [
+            {
+                x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
+                y: [1, 3, 6],
+                type: 'scatter'
+            }
+            ];
+              
+            Plotly.newPlot('myDiv', data2);
         });
     });    
 
