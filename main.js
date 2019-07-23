@@ -1,12 +1,10 @@
-const ipcRenderer = require('electron').ipcRenderer;
+const { ipcRenderer } = require('electron');
 
-let name = $('#name').val();
+var showGraph = $('#graphPlot').val();
 
-var divHandler = $('#graphDiv').val(); 
-$('#graphDiv').click( function(event){
-    ipcRenderer.send('nameMsg', name.value);
+ipcRenderer.on('forWin2', function (event, arg){
+    console.log(arg);
+    showGraph.innerHTML = arg;
 });
 
-ipcRenderer.on('nameReply', function(event,arg) {
-    console.log(arg) // why/what is not right..
-});
+console.log("I'm Main Window");
