@@ -1,7 +1,6 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-const remote = require('electron').remote;
 
 const {app, BrowserWindow, Menu} = electron;
 
@@ -102,9 +101,7 @@ const mainMenuTemplate = [
         submenu: [
             {
                 label: 'Stocks',
-                click(){ 
-                    stockWindow();
-                }
+                click(){ stockWindow(); }
             },
             {
                 label: 'Forex',
