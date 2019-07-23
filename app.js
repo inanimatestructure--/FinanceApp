@@ -2,7 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow, ipcMain, Menu} = electron;
 
 let main
 let stock
@@ -11,7 +11,37 @@ let cryptocurrency
 
 // LISTEN FOR APP TO BE READY
 app.on('ready', function(){
-    //CREATE NEW WINDOW 
+    
+    main = mainWindow();
+    stock = stockWindow();
+    forex = forexWindow();
+    cryptocurrency = cryptocurrencyWindow();
+    
+    // BUILD MENU FROM TEMPLATE
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+	
+    // INSERT MENU
+    Menu.setApplicationMenu(mainMenu);
+    
+	/*** CURRENTLY NOT WORKING IN PROGRESS
+	***
+	//SEND A MESSAGES BACK AND FORTH TO MAIN WINDOW AND COMMON WINDOWS
+    ipcMain.on('Message', (event, arg) => {
+		console.log("Name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
+  		event.sender.send('nameReply', { not_right: false }) // sends back/replies to window 1 - "event" is a reference to this chanel.
+  		stock.webContents.send( 'hi friend', arg ); // sends the stuff from Window1 to Window2.
+	} 
+	****
+	**/
+
+	
+});
+
+/** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/
+
+function mainWindow(){
+    
+//CREATE NEW WINDOW 
     main = new BrowserWindow({
         width: 1200,
         height: 1200
@@ -25,17 +55,13 @@ app.on('ready', function(){
     }));
 
     main.webContents.openDevTools();
-
-    // BUILD MENU FROM TEMPLATE
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-
-    // INSERT MENU
-    Menu.setApplicationMenu(mainMenu);
-
-
-});
-
-/** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/
+    
+    main.on('closed', function() {
+        main = null;
+    });
+    
+    return main;
+}
 
 function cryptocurrencyWindow(){
     cryptocurrency = new BrowserWindow({      
@@ -43,6 +69,7 @@ function cryptocurrencyWindow(){
         height: 1200,
         autoHideMenuBar: true,
         title: 'Cryptocurrency',
+        show: false,
         parent: main
     });
 
@@ -53,7 +80,12 @@ function cryptocurrencyWindow(){
     }));
 
     cryptocurrency.webContents.openDevTools();
-
+   
+    cryptocurrency.on('closed', function() {
+        cryptocurrency = null;
+    });
+    
+    return cryptocurrency;
 }
 
 function forexWindow(){
@@ -62,6 +94,7 @@ function forexWindow(){
         height: 1200,
         autoHideMenuBar: true,
         title: 'Forex',
+        show: false,
         parent: main
     });
 
@@ -72,6 +105,12 @@ function forexWindow(){
     }));
 
     forex.webContents.openDevTools();
+    
+    forex.on('closed', function() {
+       forex = null;
+    });
+    
+    return forex;
 
 }
 
@@ -81,6 +120,7 @@ function stockWindow(){
         height: 1200,
         autoHideMenuBar: true,
         title: 'Stocks',
+        show: false,
         parent: main
     });
 
@@ -91,7 +131,12 @@ function stockWindow(){
     }));
 
     stock.webContents.openDevTools();
+    
+    stock.on('closed', function() {
+        stock = null;
+    });
 
+    return stock;
 }
 
 /**Main Menu Template for the app */
@@ -102,15 +147,15 @@ const mainMenuTemplate = [
         submenu: [
             {
                 label: 'Stocks',
-                click(){ stockWindow(); }
+                click(){ stock.show(); }
             },
             {
                 label: 'Forex',
-                click(){ forexWindow(); }
+                click(){ forex.show(); }
             },
             {
                 label: 'Cryptocurrency',
-                click(){ cryptocurrencyWindow(); }
+                click(){ cryptocurrency.show(); }
             }
         ]
     },
