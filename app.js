@@ -32,6 +32,7 @@ app.on('ready', function(){
     // INSERT MENU
     Menu.setApplicationMenu(mainMenu);
 
+
 });
 
 /** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/

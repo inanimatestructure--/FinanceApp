@@ -1,5 +1,6 @@
 var config = "";
 
+
 $(document).ready(function(){
     timeseriesScreen();
     //forex();
