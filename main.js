@@ -1,5 +1,4 @@
-
-const ipcRenderer = require('electron').ipcRenderer
+const ipcRenderer = require('electron').ipcRenderer;
 
 let name = $('#name');
 
