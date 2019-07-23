@@ -2,7 +2,7 @@ var config = "";
 
 const { ipcRenderer } = require('electron');
 
-showName = document.getElementById('showName');
+var showName = $('#showName').val();
 
 ipcRenderer.on('forWin2', function (event, arg){
     console.log(arg);
