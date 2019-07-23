@@ -24,14 +24,14 @@ app.on('ready', function(){
     Menu.setApplicationMenu(mainMenu);
     
 	/*** CURRENTLY NOT WORKING IN PROGRESS
-	***
+	***/
 	//SEND A MESSAGES BACK AND FORTH TO MAIN WINDOW AND COMMON WINDOWS
-    ipcMain.on('Message', (event, arg) => {
+    ipcMain.on('Message',function(event,arg) {
 		console.log("Name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
   		event.sender.send('nameReply', { not_right: false }) // sends back/replies to window 1 - "event" is a reference to this chanel.
-  		stock.webContents.send( 'hi friend', arg ); // sends the stuff from Window1 to Window2.
+  		stock.webContents.send('hi friend', arg); // sends the stuff from Window1 to Window2.
 	} 
-	****
+	/****
 	**/
 
 	
