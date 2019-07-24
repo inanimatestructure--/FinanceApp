@@ -1,6 +1,16 @@
 var config = "";
 
+/** 
+*** ipc render stuff
+**/
 const ipcRenderer = require('electron').ipcRenderer;
+
+
+
+/**
+**
+***render stuff
+**/
 
 $(document).ready(function(){
     timeseriesScreen();
