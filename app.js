@@ -1,9 +1,9 @@
-var plotly = require('plotly')("jakehollis425","71jKm0ZEjaalP0OfkPV3");
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const {app, BrowserWindow, Menu} = electron;
+
+const {app, BrowserWindow, ipcMain, Menu} = electron;
 
 let main
 let stock
@@ -12,10 +12,48 @@ let cryptocurrency
 
 // LISTEN FOR APP TO BE READY
 app.on('ready', function(){
-    //CREATE NEW WINDOW 
+    
+    main = mainWindow();
+    stock = stockWindow();
+    forex = forexWindow();
+    cryptocurrency = cryptocurrencyWindow();
+    
+    // BUILD MENU FROM TEMPLATE
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+	
+    // INSERT MENU
+    Menu.setApplicationMenu(mainMenu);
+    
+	/*** CURRENTLY NOT WORKING IN PROGRESS
+	***/
+	//SEND A MESSAGES BACK AND FORTH TO MAIN WINDOW AND COMMON WINDOWS
+    ipcMain.on('Message',function(event,arg) {
+        console.log("Name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
+        event.sender.send('nameReply', { not_right: false }) // sends back/replies to window 1 - "event" is a reference to this chanel.
+        stock.webContents.send('hi friend', arg); // sends the stuff from Window1 to Window2.
+     }); 
+/****
+	**/
+});
+
+app.on('window-all-closed',function() {
+    if(process.platform !== 'darwin'){
+        app.quit();
+    }
+});
+
+/** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/
+
+function mainWindow(){
+    
+//CREATE NEW WINDOW 
     main = new BrowserWindow({
-        width: 1250,
-        height: 1000
+        width: 1200,
+        height: 1200,
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+        },
     });
     // LOAD HTML INTO WINDOW
 
@@ -26,24 +64,26 @@ app.on('ready', function(){
     }));
 
     main.webContents.openDevTools();
-
-    // BUILD MENU FROM TEMPLATE
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-
-    // INSERT MENU
-    Menu.setApplicationMenu(mainMenu);
-
-});
-
-/** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/
+    
+    main.on('closed', function() {
+        main = null;
+    });
+    
+    return main;
+}
 
 function cryptocurrencyWindow(){
     cryptocurrency = new BrowserWindow({      
-        width: 500,
-        height: 500,
+        width: 1200,
+        height: 1200,
         autoHideMenuBar: true,
         title: 'Cryptocurrency',
-        parent: main
+        show: false,
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+ 
+        },
     });
 
     cryptocurrency.loadURL(url.format({
@@ -53,16 +93,27 @@ function cryptocurrencyWindow(){
     }));
 
     cryptocurrency.webContents.openDevTools();
-
+   
+    cryptocurrency.on('closed', function() {
+        cryptocurrency = null;
+    });
+    
+    return cryptocurrency;
 }
 
 function forexWindow(){
     forex = new BrowserWindow({      
-        width: 500,
-        height: 500,
+        width: 1200,
+        height: 1200,
         autoHideMenuBar: true,
         title: 'Forex',
-        parent: main
+        show: false,
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+ 
+        },
+
     });
 
     forex.loadURL(url.format({
@@ -72,16 +123,28 @@ function forexWindow(){
     }));
 
     forex.webContents.openDevTools();
+    
+    forex.on('closed', function() {
+       forex = null;
+    });
+    
+    return forex;
 
 }
 
 function stockWindow(){
     stock = new BrowserWindow({      
-        width: 500, 
-        height: 500,
+        width: 1200, 
+        height: 1200,
         autoHideMenuBar: true,
         title: 'Stocks',
-        parent: main
+        show: false,
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+ 
+        },
+
     });
 
     stock.loadURL(url.format({
@@ -91,7 +154,12 @@ function stockWindow(){
     }));
 
     stock.webContents.openDevTools();
+    
+    stock.on('closed', function() {
+        stock = null;
+    });
 
+    return stock;
 }
 
 /**Main Menu Template for the app */
@@ -102,15 +170,15 @@ const mainMenuTemplate = [
         submenu: [
             {
                 label: 'Stocks',
-                click(){ stockWindow(); }
+                click(){ stock.show(); }
             },
             {
                 label: 'Forex',
-                click(){ forexWindow(); }
+                click(){ forex.show(); }
             },
             {
                 label: 'Cryptocurrency',
-                click(){ cryptocurrencyWindow(); }
+                click(){ cryptocurrency.show(); }
             }
         ]
     },

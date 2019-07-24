@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <title>Stocks </title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../common.js"></script>
+    <script> 
+        window.$ = window.jQuery = require('jquery');
+    </script>
+    <script> require('../common.js'); </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div class="TIME_SERIES">
@@ -30,17 +33,32 @@
                 <label for="symbolSearchLabel">Symbol Search: </label>
                 <select class="symbolSearchList"></select></br>
             </div></br>
+            <div id="datatype">
+                <label for="dType">Data Type: </label>
+                <select class="form-control" id="dtObject">
+                    <option value="json">JSON</option>
+                    <option value="csv">CSV</option>
+                </select>
+            </div>
             <div id="outputsize"> 
                 <label for="from">Output Size: </label>
-                <select class="outputsizeList">
+                <select class="form-control" id="outputsizeList">
                     <option value="compact">Compact</option>
                     <option value="full">Full</option>
                 </select>
             </div></br>
             <div id="interval">
                 <label for="to">Interval: </label>
-                <input type="text" class="intervalStocks"/>
-            </div></br>
+                <select class="form-control" id="intervalStocks">
+                    <option value="1min">1 min</option>
+                    <option value="5min">5 min</option>
+                    <option value="15min">15 min</option>
+                    <option value="30min">30 min</option>
+                    <option value="60min">60 min</option>
+                </select>
+            </div>
+            <div id="myDiv"></div>
+            </br>
             <input type="button" class="submit" value="Submit"></input>
         </div>
     </div>
