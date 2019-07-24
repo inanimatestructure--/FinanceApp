@@ -2,6 +2,7 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
+
 const {app, BrowserWindow, ipcMain, Menu} = electron;
 
 let main
@@ -27,14 +28,18 @@ app.on('ready', function(){
 	***/
 	//SEND A MESSAGES BACK AND FORTH TO MAIN WINDOW AND COMMON WINDOWS
     ipcMain.on('Message',function(event,arg) {
-	console.log("Name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
-	event.sender.send('nameReply', { not_right: false }) // sends back/replies to window 1 - "event" is a reference to this chanel.
-	stock.webContents.send('hi friend', arg); // sends the stuff from Window1 to Window2.
-     } 
+        console.log("Name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
+        event.sender.send('nameReply', { not_right: false }) // sends back/replies to window 1 - "event" is a reference to this chanel.
+        stock.webContents.send('hi friend', arg); // sends the stuff from Window1 to Window2.
+     }); 
 /****
 	**/
+});
 
-	
+app.on('window-all-closed',function() {
+    if(process.platform !== 'darwin'){
+        app.quit();
+    }
 });
 
 /** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/
@@ -44,7 +49,11 @@ function mainWindow(){
 //CREATE NEW WINDOW 
     main = new BrowserWindow({
         width: 1200,
-        height: 1200
+        height: 1200,
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+        },
     });
     // LOAD HTML INTO WINDOW
 
@@ -70,7 +79,11 @@ function cryptocurrencyWindow(){
         autoHideMenuBar: true,
         title: 'Cryptocurrency',
         show: false,
-        parent: main
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+ 
+        },
     });
 
     cryptocurrency.loadURL(url.format({
@@ -95,7 +108,12 @@ function forexWindow(){
         autoHideMenuBar: true,
         title: 'Forex',
         show: false,
-        parent: main
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+ 
+        },
+
     });
 
     forex.loadURL(url.format({
@@ -121,7 +139,12 @@ function stockWindow(){
         autoHideMenuBar: true,
         title: 'Stocks',
         show: false,
-        parent: main
+        webPreferences: {
+            nativeWindowOpen: true,
+            nodeIntegration: true
+ 
+        },
+
     });
 
     stock.loadURL(url.format({

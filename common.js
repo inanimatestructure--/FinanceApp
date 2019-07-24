@@ -5,15 +5,7 @@ var config = "";
 **/
 const ipcRenderer = require('electron').ipcRenderer;
 
-let name = 'test';
 
-$('#submit').click( function(event){
-    ipcRenderer.send('nameMsg', name);
-});
-
-ipcRenderer.on('nameReply', function(event,args){
-  console.log(arg); // why/what is not right..
-});
 
 /**
 **
@@ -22,6 +14,16 @@ ipcRenderer.on('nameReply', function(event,args){
 
 $(document).ready(function(){
     timeseriesScreen();
+
+    let name = 'test';
+
+    $('.submit').click( function(event){
+        ipcRenderer.send('nameMsg', name);
+    });
+
+    ipcRenderer.on('nameReply', function(event,args){
+        console.log(arg); // why/what is not right..
+    });
     //forex();
     //cryptocurrency();
 });
