@@ -3,18 +3,11 @@ var stockData = {};
 
 const {ipcRenderer} = require('electron');
 
-
-
-
 $(document).ready(function(){
     timeseriesScreen();
     //forex();
     //cryptocurrency();
 });
-
-function stockMainSend(data){
-   
-}
 
 function forexScreen(){
    var Forex = new Object();
@@ -111,7 +104,6 @@ function timeseriesScreen(){
         else{
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
-        
         $.get(mainTimeSeriesURL ,function(data){
             stockData = [
                 {
@@ -119,9 +111,8 @@ function timeseriesScreen(){
                     y: [1, 3, 6],
                     type: 'scatter'
                 }
-                
             ];
-            $('event').trigger('click');
+            $('.event').trigger('click');
             // Plotly.newPlot('graphPlot', stockData);
         });
     });    
