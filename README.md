@@ -34,7 +34,7 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
 Plotly will just be used in a script tag from CDN.
 
-We're also using the jquery min file off cloudflare in the script tags and Tensorflow's API which I don't have yet but will at some point once the wrapper idea is complete. Happy coding. 
+We're also using Tensorflow's API which I don't have yet but will at some point once the wrapper idea is complete. Happy coding. 
 
 To run the program write:
 
