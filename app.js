@@ -10,6 +10,8 @@ let stock
 let forex
 let cryptocurrency
 
+
+
 // LISTEN FOR APP TO BE READY
 app.on('ready', function(){
     
@@ -17,23 +19,18 @@ app.on('ready', function(){
     stock = stockWindow();
     forex = forexWindow();
     cryptocurrency = cryptocurrencyWindow();
+
+    ipcMain.on('hide-stock-window',(event,args) => {
+        main.webContents.send('action-hide-window',args);
+    });
     
     // BUILD MENU FROM TEMPLATE
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 	
     // INSERT MENU
     Menu.setApplicationMenu(mainMenu);
-    
-	/*** CURRENTLY NOT WORKING IN PROGRESS
-	***/
-	//SEND A MESSAGES BACK AND FORTH TO MAIN WINDOW AND COMMON WINDOWS
-    ipcMain.on('Message',function(event,arg) {
-        console.log("Name inside main process is: ", arg); // this comes form within window 1 -> and into the mainProcess
-        event.sender.send('nameReply', { not_right: false }) // sends back/replies to window 1 - "event" is a reference to this chanel.
-        stock.webContents.send('hi friend', arg); // sends the stuff from Window1 to Window2.
-     }); 
-/****
-	**/
+
+
 });
 
 app.on('window-all-closed',function() {
@@ -51,7 +48,6 @@ function mainWindow(){
         width: 1200,
         height: 1200,
         webPreferences: {
-            nativeWindowOpen: true,
             nodeIntegration: true
         },
     });
@@ -65,9 +61,6 @@ function mainWindow(){
 
     main.webContents.openDevTools();
     
-    main.on('closed', function() {
-        main = null;
-    });
     
     return main;
 }
@@ -82,7 +75,6 @@ function cryptocurrencyWindow(){
         webPreferences: {
             nativeWindowOpen: true,
             nodeIntegration: true
- 
         },
     });
 
@@ -93,10 +85,7 @@ function cryptocurrencyWindow(){
     }));
 
     cryptocurrency.webContents.openDevTools();
-   
-    cryptocurrency.on('closed', function() {
-        cryptocurrency = null;
-    });
+
     
     return cryptocurrency;
 }
@@ -123,10 +112,6 @@ function forexWindow(){
     }));
 
     forex.webContents.openDevTools();
-    
-    forex.on('closed', function() {
-       forex = null;
-    });
     
     return forex;
 

@@ -1,18 +1,14 @@
 /** 
 **COMMUNICATION WITH IPC RENDER
 **/
-const { ipcRenderer } = require('electron');
+const {ipcRenderer} = require('electron');
 
+ipcRenderer.on('action-hide-window', (event,args) =>{
+    Plotly.newPlot('graphPlot', args);
+});
 
 $(document).ready(function(){
     var showGraph = $('#graphPlot');
-    
-    ipcRenderer.on('forWin2', function (event, arg){
-        console.log(arg);
-        showGraph.val() = arg;
-    });
-    
-
     console.log("I'm Main Window");
 });
 

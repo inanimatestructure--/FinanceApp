@@ -1,29 +1,10 @@
 var config = "";
+var stockData = {};
 
-/** 
-*** ipc render stuff
-**/
-const ipcRenderer = require('electron').ipcRenderer;
-
-
-
-/**
-**
-***render stuff
-**/
+const {ipcRenderer} = require('electron');
 
 $(document).ready(function(){
     timeseriesScreen();
-
-    let name = 'test';
-
-    $('.submit').click( function(event){
-        ipcRenderer.send('nameMsg', name);
-    });
-
-    ipcRenderer.on('nameReply', function(event,args){
-        console.log(arg); // why/what is not right..
-    });
     //forex();
     //cryptocurrency();
 });
@@ -45,7 +26,7 @@ function cryptocurrencyScreen(){
 }
 
 function timeseriesScreen(){
-
+    
     var time_series = new Object();
     
     $('#symbols').hide();
@@ -59,7 +40,7 @@ function timeseriesScreen(){
     $.getJSON("../alphakey.json", function(data){
         config = data.alphakey;
     });
-   
+
     var alphaStartUrl = "https://www.alphavantage.co/query?";
 
     var symSearchUrl = "";
@@ -78,6 +59,10 @@ function timeseriesScreen(){
         time_series.interval = $(this).val();
     });
 
+    $('.event').click( function(){
+        ipcRenderer.send('hide-stock-window', stockData);
+    });
+
     $('#dtObject').change(function(){
         time_series.datatype = $(this).val();
     });
@@ -89,7 +74,6 @@ function timeseriesScreen(){
     $('.keywords').change(function(){
         $('.keywordsearch').removeAttr("disabled");
     });
-
 
     $('.keywordsearch').click(function(e){
         $('.symbolSearchList').empty();
@@ -121,15 +105,15 @@ function timeseriesScreen(){
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
         $.get(mainTimeSeriesURL ,function(data){
-            var data2 = [
-            {
-                x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
-                y: [1, 3, 6],
-                type: 'scatter'
-            }
+            stockData = [
+                {
+                    x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
+                    y: [1, 3, 6],
+                    type: 'scatter'
+                }
             ];
-              
-            Plotly.newPlot('myDiv', data2);
+            $('.event').trigger('click');
+            // Plotly.newPlot('graphPlot', stockData);
         });
     });    
 
