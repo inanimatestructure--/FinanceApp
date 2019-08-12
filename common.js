@@ -113,7 +113,6 @@ function timeseriesScreen(){
                 }
             ];
             $('.event').trigger('click');
-            // Plotly.newPlot('graphPlot', stockData);
         });
     });    
 

@@ -10,8 +10,6 @@ let stock
 let forex
 let cryptocurrency
 
-
-
 // LISTEN FOR APP TO BE READY
 app.on('ready', function(){
     
@@ -22,6 +20,7 @@ app.on('ready', function(){
 
     ipcMain.on('hide-stock-window',(event,args) => {
         main.webContents.send('action-hide-window',args);
+        stock.hide();
     });
     
     // BUILD MENU FROM TEMPLATE
