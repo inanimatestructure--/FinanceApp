@@ -20,7 +20,7 @@ app.on('ready', function(){
 
     ipcMain.on('hide-stock-window',(event,args) => {
         main.webContents.send('action-hide-window',args);
-        stock.hide();
+        // stock.hide();
     });
     
     // BUILD MENU FROM TEMPLATE

@@ -5,8 +5,8 @@ const {ipcRenderer} = require('electron');
 
 $(document).ready(function(){
     timeseriesScreen();
-    //forex();
-    //cryptocurrency();
+    //forexScreen();
+    //cryptocurrencyScreen();
 });
 
 function forexScreen(){
@@ -59,7 +59,7 @@ function timeseriesScreen(){
         time_series.interval = $(this).val();
     });
 
-    $('.event').click( function(){
+    $('.event').click(function(){
         ipcRenderer.send('hide-stock-window', stockData);
     });
 
@@ -105,14 +105,27 @@ function timeseriesScreen(){
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
         $.get(mainTimeSeriesURL ,function(data){
-            stockData = [
-                {
-                    x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
-                    y: [1, 3, 6],
-                    type: 'scatter'
+            // stockData = [
+            //     {
+            //         x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
+            //         y: [1, 3, 6],
+            //         type: 'scatter'
+            //     }
+            // ];
+            var counter = 0;
+
+            for(var key in data){
+                // SKIPPING METADATA KINDA HACKY but whatever
+                if(counter > 0 ){
+                    console.log(key);
+                    for(var key2 in data[key]){
+                        console.log(key2);
+                        console.log(data[key][key2]['1. open']);
+                    }
                 }
-            ];
-            $('.event').trigger('click');
+                counter++;
+            }
+            // $('.event').trigger('click');
         });
     });    
 
