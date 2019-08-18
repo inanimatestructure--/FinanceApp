@@ -110,8 +110,10 @@ function timeseriesScreen(){
             //         x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
             //         y: [1, 3, 6],
             //         type: 'scatter'
-            //     }
+            //     } 
             // ];
+            var x = [];
+            var y = [];
             var counter = 0;
 
             for(var key in data){
@@ -119,8 +121,8 @@ function timeseriesScreen(){
                 if(counter > 0 ){
                     console.log(key);
                     for(var key2 in data[key]){
-                        console.log(key2);
-                        console.log(data[key][key2]['1. open']);
+                        y.push(data[key][key2]['1. open']);
+                        x.push(key2);
                     }
                 }
                 counter++;
