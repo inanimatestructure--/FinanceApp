@@ -105,15 +105,8 @@ function timeseriesScreen(){
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
         $.get(mainTimeSeriesURL ,function(data){
-            // stockData = [
-            //     {
-            //         x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00'],
-            //         y: [1, 3, 6],
-            //         type: 'scatter'
-            //     } 
-            // ];
-            var x = [];
-            var y = [];
+            var x1 = [];
+            var y1 = [];
             var counter = 0;
 
             for(var key in data){
@@ -121,13 +114,21 @@ function timeseriesScreen(){
                 if(counter > 0 ){
                     console.log(key);
                     for(var key2 in data[key]){
-                        y.push(data[key][key2]['1. open']);
-                        x.push(key2);
+                        y1.push(data[key][key2]['4. close']);
+                        x1.push(key2);
                     }
                 }
                 counter++;
             }
-            // $('.event').trigger('click');
+
+            stockData = [
+                {
+                    x: x1,
+                    y: y1,
+                    type: 'scatter'
+                } 
+            ];
+            $('.event').trigger('click');
         });
     });    
 
