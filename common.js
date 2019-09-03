@@ -1,7 +1,9 @@
 var config = "";
-var stockData = {};
-
+var stockData = [];
+var change;
 const {ipcRenderer} = require('electron');
+
+
 
 $(document).ready(function(){
     timeseriesScreen();
@@ -26,7 +28,9 @@ function cryptocurrencyScreen(){
 }
 
 function timeseriesScreen(){
-    
+
+    $("body").css('background-color','#696969');
+
     var time_series = new Object();
     
     $('#symbols').hide();
@@ -60,6 +64,7 @@ function timeseriesScreen(){
     });
 
     $('.event').click(function(){
+        ipcRenderer.send('global-quote', change);
         ipcRenderer.send('hide-stock-window', stockData);
     });
 
@@ -92,9 +97,15 @@ function timeseriesScreen(){
     $(".symbolSearchList").on("change",function(){
         var symbolSearch = $(this).val();
         time_series.symbol = symbolSearch;
+
+        var globalquoteURL = alphaStartUrl + "function=GLOBAL_QUOTE&symbol=" + time_series.symbol + "&apikey=" + config; 
+        $.get(globalquoteURL, function(e){
+            change = e['Global Quote']['10. change percent'];
+        });
     });
 
     $(".submit").click(function(e){
+              
         if($("#stockFunction").val() == "TIME_SERIES_INTRADAY"){
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&interval=" + time_series.interval + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
@@ -104,6 +115,7 @@ function timeseriesScreen(){
         else{
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
+
         $.get(mainTimeSeriesURL ,function(data){
             var x1 = [];
             var y1 = [];
@@ -112,7 +124,6 @@ function timeseriesScreen(){
             for(var key in data){
                 // SKIPPING METADATA KINDA HACKY but whatever
                 if(counter > 0 ){
-                    console.log(key);
                     for(var key2 in data[key]){
                         y1.push(data[key][key2]['4. close']);
                         x1.push(key2);
@@ -120,14 +131,22 @@ function timeseriesScreen(){
                 }
                 counter++;
             }
-
             stockData = [
                 {
                     x: x1,
                     y: y1,
-                    type: 'scatter'
-                } 
+                    mode: 'lines+markers',
+                    marker: {
+                      color: 'rgb(217, 157, 255)',
+                      size: 5
+                    },
+                    line: {
+                        color: 'rgb(231, 99, 250)',
+                        width: 2
+                      }
+                }
             ];
+
             $('.event').trigger('click');
         });
     });    
