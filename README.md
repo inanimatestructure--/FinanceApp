@@ -7,12 +7,13 @@ This project is designed by yours truly (:^)) to grab stock data from Alpha Vant
 
 #### 1. Edit the common.js file to get the alpha vantage data from the respective fields on the popup pages.
 
-#### 2. Setup plotly so that it creates tables on the main page using the open or close values in the retrieved API data.
+~~2. Setup plotly so that it creates tables on the main page using the open or close values in the retrieved API data.~~
 
-#### 3. If there's any other way this app could be more functional/user friendly (IE placements of html or jquery/js animations) I'd love to hear some ideas. I would like to just get it functioning at this point but any kind of aesthetic change is welcome. As long as it's reasonable and doesn't look like a pile of shit.
+#### 3. If there's any other way this app could be more functional/user friendly (IE placements of html or jquery/js animations) I'd love to hear some ideas. I would like to just get it functioning at this point but any kind of aesthetic change is welcome.
 
 #### 4. Add CSS which really should be the last thing. Maybe give the user an option to customize their application?
 
+#### 5. We will need to create a small routing system server side to handle calls to the alpha vantage API. We can't have api calls on the client because people can see our key and that's not good. We could make a restful api with nodejs/expressjs to keep consistency or tryout a swiss army knife language like python, perl, php, ruby etc.
 
 ## Resources 
 
@@ -39,5 +40,9 @@ We're also using Tensorflow's API which I don't have yet but will at some point 
 To run the program write:
 
 ` $ npm start ` 
+
+or alternatively:
+
+` electron . `
 
 In your project directory in cmd/powershell for Windows and terminal for Linux.
