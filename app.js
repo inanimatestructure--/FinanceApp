@@ -10,8 +10,6 @@ let stock
 let forex
 let cryptocurrency
 
-
-
 // LISTEN FOR APP TO BE READY
 app.on('ready', function(){
     
@@ -24,6 +22,10 @@ app.on('ready', function(){
         main.webContents.send('action-hide-window',args);
     });
     
+    ipcMain.on('global-quote',(event,args) => {
+        main.webContents.send('action-global',args);
+    });
+
     // BUILD MENU FROM TEMPLATE
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 	
@@ -33,11 +35,7 @@ app.on('ready', function(){
 
 });
 
-app.on('window-all-closed',function() {
-    if(process.platform !== 'darwin'){
-        app.quit();
-    }
-});
+
 
 /** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/
 
@@ -59,7 +57,7 @@ function mainWindow(){
         slashes: true
     }));
 
-    main.webContents.openDevTools();
+    // main.webContents.openDevTools();
     
     
     return main;
@@ -67,8 +65,8 @@ function mainWindow(){
 
 function cryptocurrencyWindow(){
     cryptocurrency = new BrowserWindow({      
-        width: 1200,
-        height: 1200,
+        width: 400,
+        height: 400,
         autoHideMenuBar: true,
         title: 'Cryptocurrency',
         show: false,
@@ -84,7 +82,7 @@ function cryptocurrencyWindow(){
         slashes: true
     }));
 
-    cryptocurrency.webContents.openDevTools();
+    // cryptocurrency.webContents.openDevTools();
 
     
     return cryptocurrency;
@@ -92,8 +90,8 @@ function cryptocurrencyWindow(){
 
 function forexWindow(){
     forex = new BrowserWindow({      
-        width: 1200,
-        height: 1200,
+        width: 400,
+        height: 400,
         autoHideMenuBar: true,
         title: 'Forex',
         show: false,
@@ -111,7 +109,7 @@ function forexWindow(){
         slashes: true
     }));
 
-    forex.webContents.openDevTools();
+    // forex.webContents.openDevTools();
     
     return forex;
 
@@ -119,8 +117,8 @@ function forexWindow(){
 
 function stockWindow(){
     stock = new BrowserWindow({      
-        width: 1200, 
-        height: 1200,
+        width: 400, 
+        height: 400,
         autoHideMenuBar: true,
         title: 'Stocks',
         show: false,
@@ -138,11 +136,7 @@ function stockWindow(){
         slashes: true
     }));
 
-    stock.webContents.openDevTools();
-    
-    stock.on('closed', function() {
-        stock = null;
-    });
+    // stock.webContents.openDevTools();
 
     return stock;
 }
