@@ -41,10 +41,6 @@ function timeseriesScreen(){
     time_series.datatype = $("#dtObject").val();
     time_series.outputsize = $("#outputsizeList").val();
 
-    $.getJSON("../alphakey.json", function(data){
-        config = data.alphakey;
-    });
-
     var alphaStartUrl = "https://www.alphavantage.co/query?";
 
     var symSearchUrl = "";
