@@ -3,8 +3,6 @@ var stockData = [];
 var change;
 const {ipcRenderer} = require('electron');
 
-
-
 $(document).ready(function(){
     timeseriesScreen();
     //forexScreen();
@@ -33,14 +31,15 @@ function timeseriesScreen(){
 
     var time_series = new Object();
     
-    $('#symbols').hide();
+    
 
     time_series.function = $("#stockFunction").val();
     time_series.symbol = $("#symbolSearchList").val();  
     time_series.interval = $("#intervalStocks").val();
     time_series.datatype = $("#dtObject").val();
     time_series.outputsize = $("#outputsizeList").val();
-
+    
+    $('#symbols').hide();
     var alphaStartUrl = "https://www.alphavantage.co/query?";
 
     var symSearchUrl = "";
@@ -101,7 +100,6 @@ function timeseriesScreen(){
     });
 
     $(".submit").click(function(e){
-              
         if($("#stockFunction").val() == "TIME_SERIES_INTRADAY"){
             mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&interval=" + time_series.interval + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + config;
         }
