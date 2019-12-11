@@ -1,11 +1,15 @@
 const express = require('express');
-const router = express.Router();
+const path = require('path');
+var app = express();
+const request = require('request');
+
+app.set('views', path.join(__dirname, '/html'));
 
 const config = "2KZ9MV9TBQDE4YRY";
 const alphaStartUrl = "https://www.alphavantage.co/query?";
 
 
-router.get('/timeseries/#function/#symbol/#interval/#outputsize/#datatype',function(req,res){
+app.get('/timeseries/#function/#symbol/#interval/#outputsize/#datatype', function(req,res){
    var mainTimeSeriesURL;
    if(functionA == "TIME_SERIES_INTRADAY"){
       mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&interval=" + time_series.interval + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + config;
@@ -14,20 +18,28 @@ router.get('/timeseries/#function/#symbol/#interval/#outputsize/#datatype',funct
       mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + config;
    } 
    else{
-      mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
+      mainTimeSeriesURL = alphaStartUrl + "function=" + req.function + "&symbol=" + req.symbol + "&datatype=" + req.datatype + "&apikey=" + config;
    }
 
-   $.get('mainTimeSeriesURL',function(data){
-         res.send(data);
+   request(mainTimeSeriesURL, function(error,response,body){
+      var data = JSON.parse(body);
+      res.send(body);
    });
+   
     
 });
 
-router.get('/timeseries/#keywords',function(req,res){
-   var symSearchUrl = alphaStartUrl + "function=SYMBOL_SEARCH&keywords=" + time_series.keyword + "&apikey=" + config;
+app.get('/timeseries/#keywords', function(req,res){
+   var symSearchUrl = alphaStartUrl + "function=SYMBOL_SEARCH&keywords=" + req.keyword + "&apikey=" + config;
+   request(symSearchUrl, function(error,response,body){
+      res.send(body);
+   });
 });
 
 
-router.get('/#symbol',function(req,res){
-   var globalQuoteURL = alphaStartUrl + "function=GLOBAL_QUOTE&symbol=" + time_series.symbol + "&apikey=" + config; 
+app.get('/#symbol', function(req,res){
+   var globalQuoteURL = alphaStartUrl + "function=GLOBAL_QUOTE&symbol=" + req.symbol + "&apikey=" + config; 
+   request(globalQuoteURL, function(error,response,body){
+      res.send(body);
+   });
 });

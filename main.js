@@ -7,7 +7,6 @@ $(document).ready(function(){
         paper_bgcolor:"#696969",
         
     };
-
     $("body").css('background-color','#696969');
 });
 
