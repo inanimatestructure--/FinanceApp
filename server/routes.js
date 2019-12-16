@@ -15,7 +15,7 @@ app.get('/',function(req,res){
    res.send('HI');
 });
 
-app.get('api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', function(req,res){
+app.get('/api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', function(req,res){
    var func = req.params.function;
    var symbol = req.params.symbol;
    var interval = req.params.interval;
