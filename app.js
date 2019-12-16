@@ -3,7 +3,6 @@ const url = require('url');
 const path = require('path');
 require('./server/routes.js');
 
-
 const {app, BrowserWindow, ipcMain, Menu} = electron;
 
 let main
@@ -62,7 +61,11 @@ function mainWindow(){
     });
     // LOAD HTML INTO WINDOW
 
-    main.loadURL('http://localhost:3000/');
+    main.loadURL(url.format({
+        pathname: path.join(__dirname, 'html/main.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
 
     // main.webContents.openDevTools();
     

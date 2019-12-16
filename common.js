@@ -1,6 +1,7 @@
 var config = "";
 var stockData = [];
 var change;
+const ipPort = "http://localhost:3000/";
 const {ipcRenderer} = require('electron');
 
 $(document).ready(function(){
@@ -26,6 +27,10 @@ function cryptocurrencyScreen(){
 }
 
 function timeseriesScreen(){
+
+    $.get('/',function(data){
+        console.log('this is what came back: ' + data);
+    });
 
     $("body").css('background-color','#696969');
 
@@ -79,7 +84,7 @@ function timeseriesScreen(){
         $('#symbols').show();
         time_series.keyword = $('.keywords').val();
        
-        symSearchUrl = '/timeseries/' + time_series.keyword;
+        symSearchUrl = ipPort + 'api/v1/keywords/' + time_series.keyword;
        
         $.get(symSearchUrl,function(data){
             for(var i=0; i < data.bestMatches.length; i++){
@@ -92,7 +97,7 @@ function timeseriesScreen(){
         var symbolSearch = $(this).val();
         time_series.symbol = symbolSearch;
 
-        var globalquoteURL = '/' + time_series.symbol; 
+        var globalquoteURL = ipPort + "api/v1/symbol/" + time_series.symbol; 
         $.get(globalquoteURL, function(e){
             change = e['Global Quote']['10. change percent'];
         });
@@ -100,13 +105,13 @@ function timeseriesScreen(){
 
     $(".submit").click(function(e){
         if($("#stockFunction").val() == "TIME_SERIES_INTRADAY"){
-            mainTimeSeriesURL = '/timeseries/' + time_series.function + "/" + time_series.symbol + "/" + time_series.interval + "/" + time_series.outputsize + "/" + time_series.datatype;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.interval + "/" + time_series.outputsize + "/" + time_series.datatype;
         }
         else if($("#stockFunction").val() == "TIME_SERIES_DAILY" || $("#stockFunction").val() == "TIME_SERIES_DAILY_ADJUSTED"){
-            mainTimeSeriesURL = "/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.outputsize + "/" + time_series.datatype;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.outputsize + "/" + time_series.datatype;
         }
         else{
-            mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.datatype;
         }
 
         $.get(mainTimeSeriesURL ,function(data){
