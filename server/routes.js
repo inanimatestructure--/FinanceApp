@@ -23,7 +23,7 @@ app.get('api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', f
    var datatype = req.params.datatype;
 
    var mainTimeSeriesURL = "";
-   if(func== "TIME_SERIES_INTRADAY"){
+   if(func == "TIME_SERIES_INTRADAY"){
       mainTimeSeriesURL = alphaStartUrl + "function=" + func + "&symbol=" + symbol + "&interval=" + interval + "&outputsize=" + outputsize + "&datatype=" + datatype + "&apikey=" + config;
    }
    else if(func == "TIME_SERIES_DAILY" || func == "TIME_SERIES_DAILY_ADJUSTED"){
@@ -35,7 +35,7 @@ app.get('api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', f
 
    request(mainTimeSeriesURL, function(error,response,body){
       var data = JSON.parse(body);
-      res.send(body);
+      res.send(data);
    });
    
     
@@ -45,7 +45,8 @@ app.get('/api/v1/keywords/:keywords', function(req,res){
    var keywords = req.params.keywords;
    var symSearchUrl = alphaStartUrl + "function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=" + config;
    request(symSearchUrl, function(error,response,body){
-      res.send(body);
+      var data = JSON.parse(body);
+      res.send(data);
    });
 });
 
@@ -54,6 +55,7 @@ app.get('/api/v1/symbol/:symbol', function(req,res){
    var symbol = req.params.symbol;
    var globalQuoteURL = alphaStartUrl + "function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + config; 
    request(globalQuoteURL, function(error,response,body){
-      res.send(body);
+      var data = JSON.parse(body);
+      res.send(data);
    });
 });

@@ -108,10 +108,10 @@ function timeseriesScreen(){
             mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.interval + "/" + time_series.outputsize + "/" + time_series.datatype;
         }
         else if($("#stockFunction").val() == "TIME_SERIES_DAILY" || $("#stockFunction").val() == "TIME_SERIES_DAILY_ADJUSTED"){
-            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.outputsize + "/" + time_series.datatype;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/null/" + time_series.outputsize + "/" + time_series.datatype;
         }
         else{
-            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.datatype;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/null/null/" + time_series.datatype;
         }
 
         $.get(mainTimeSeriesURL ,function(data){
