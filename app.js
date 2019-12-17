@@ -1,7 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
-
+require('./server/routes.js');
 
 const {app, BrowserWindow, ipcMain, Menu} = electron;
 
@@ -35,6 +35,12 @@ app.on('ready', function(){
 
 });
 
+app.on("window-all-closed", function() {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
+});
+
 
 
 /** FUNCTIONS TO OPEN WINDOWS TO PUT IN SPECIFICATIONS FOR MARKET GRAPHS **/
@@ -49,16 +55,19 @@ function mainWindow(){
             nodeIntegration: true
         },
     });
+    
+    main.on('close',event => {
+        mainWindow = null;
+    });
     // LOAD HTML INTO WINDOW
 
     main.loadURL(url.format({
         pathname: path.join(__dirname, 'html/main.html'),
-        protocol:'file:',
+        protocol: 'file:',
         slashes: true
     }));
 
     // main.webContents.openDevTools();
-    
     
     return main;
 }
@@ -125,9 +134,7 @@ function stockWindow(){
         webPreferences: {
             nativeWindowOpen: true,
             nodeIntegration: true
- 
         },
-
     });
 
     stock.loadURL(url.format({
@@ -136,7 +143,7 @@ function stockWindow(){
         slashes: true
     }));
 
-    // stock.webContents.openDevTools();
+    stock.webContents.openDevTools();
 
     return stock;
 }

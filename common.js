@@ -1,9 +1,8 @@
 var config = "";
 var stockData = [];
 var change;
+const ipPort = "http://localhost:3000/";
 const {ipcRenderer} = require('electron');
-
-
 
 $(document).ready(function(){
     timeseriesScreen();
@@ -29,22 +28,22 @@ function cryptocurrencyScreen(){
 
 function timeseriesScreen(){
 
+    $.get('/',function(data){
+        console.log('this is what came back: ' + data);
+    });
+
     $("body").css('background-color','#696969');
 
     var time_series = new Object();
-    
-    $('#symbols').hide();
+  
 
     time_series.function = $("#stockFunction").val();
     time_series.symbol = $("#symbolSearchList").val();  
     time_series.interval = $("#intervalStocks").val();
     time_series.datatype = $("#dtObject").val();
     time_series.outputsize = $("#outputsizeList").val();
-
-    $.getJSON("../alphakey.json", function(data){
-        config = data.alphakey;
-    });
-
+    
+    $('#symbols').hide();
     var alphaStartUrl = "https://www.alphavantage.co/query?";
 
     var symSearchUrl = "";
@@ -85,7 +84,7 @@ function timeseriesScreen(){
         $('#symbols').show();
         time_series.keyword = $('.keywords').val();
        
-        symSearchUrl = alphaStartUrl + "function=SYMBOL_SEARCH&keywords=" + time_series.keyword + "&apikey=" + config;
+        symSearchUrl = ipPort + 'api/v1/keywords/' + time_series.keyword;
        
         $.get(symSearchUrl,function(data){
             for(var i=0; i < data.bestMatches.length; i++){
@@ -98,22 +97,21 @@ function timeseriesScreen(){
         var symbolSearch = $(this).val();
         time_series.symbol = symbolSearch;
 
-        var globalquoteURL = alphaStartUrl + "function=GLOBAL_QUOTE&symbol=" + time_series.symbol + "&apikey=" + config; 
+        var globalquoteURL = ipPort + "api/v1/symbol/" + time_series.symbol; 
         $.get(globalquoteURL, function(e){
             change = e['Global Quote']['10. change percent'];
         });
     });
 
     $(".submit").click(function(e){
-              
         if($("#stockFunction").val() == "TIME_SERIES_INTRADAY"){
-            mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&interval=" + time_series.interval + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + config;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.interval + "/" + time_series.outputsize + "/" + time_series.datatype;
         }
         else if($("#stockFunction").val() == "TIME_SERIES_DAILY" || $("#stockFunction").val() == "TIME_SERIES_DAILY_ADJUSTED"){
-            mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&outputsize=" + time_series.outputsize + "&datatype=" + time_series.datatype + "&apikey=" + config;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/null/" + time_series.outputsize + "/" + time_series.datatype;
         }
         else{
-            mainTimeSeriesURL = alphaStartUrl + "function=" + time_series.function + "&symbol=" + time_series.symbol + "&datatype=" + time_series.datatype + "&apikey=" + config;
+            mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/null/null/" + time_series.datatype;
         }
 
         $.get(mainTimeSeriesURL ,function(data){

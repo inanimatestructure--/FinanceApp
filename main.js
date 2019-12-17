@@ -5,9 +5,7 @@ $(document).ready(function(){
     layout = {
         plot_bgcolor:"black",
         paper_bgcolor:"#696969",
-        
     };
-
     $("body").css('background-color','#696969');
 });
 
