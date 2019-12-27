@@ -143,8 +143,6 @@ function stockWindow(){
         slashes: true
     }));
 
-    stock.webContents.openDevTools();
-
     return stock;
 }
 

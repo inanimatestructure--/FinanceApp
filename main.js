@@ -4,9 +4,9 @@ var layout;
 $(document).ready(function(){
     layout = {
         plot_bgcolor:"black",
-        paper_bgcolor:"#696969",
+        paper_bgcolor:"#FFFCCC",
     };
-    $("body").css('background-color','#696969');
+    $("body").css('background-color','#FFFCFC');
 });
 
 ipcRenderer.on('action-hide-window', (event,args) =>{
