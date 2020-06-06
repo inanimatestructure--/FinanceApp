@@ -43,8 +43,4 @@ To run the program write:
 
 ` $ npm start ` 
 
-or alternatively:
-
-` electron . `
-
 In your project directory in cmd/powershell for Windows and terminal for Linux.

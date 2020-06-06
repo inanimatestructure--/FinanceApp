@@ -67,7 +67,7 @@ function mainWindow(){
         slashes: true
     }));
 
-    // main.webContents.openDevTools();
+    main.webContents.openDevTools();
     
     return main;
 }
@@ -91,7 +91,7 @@ function cryptocurrencyWindow(){
         slashes: true
     }));
 
-    // cryptocurrency.webContents.openDevTools();
+    cryptocurrency.webContents.openDevTools();
 
     
     return cryptocurrency;
@@ -118,7 +118,7 @@ function forexWindow(){
         slashes: true
     }));
 
-    // forex.webContents.openDevTools();
+    forex.webContents.openDevTools();
     
     return forex;
 
