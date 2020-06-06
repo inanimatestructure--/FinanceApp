@@ -21,7 +21,7 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
 ` $ node common.js  `
 
- It (should) installs node_modules in your directory which will be ignored by the gitignore file when you push it up (which is why it doesn't show up in master or my branch). Npm is part of the node_modules which will allow you to install the following below:
+ It (should) install node_modules in your directory which will be ignored by the gitignore file when you push it up (which is why it doesn't show up in master or my branch). Npm is part of the node_modules which will allow you to install the following below:
 
  Electron, jQuery and Express:
 
@@ -42,9 +42,5 @@ We're also using Tensorflow's API which I don't have yet but will at some point 
 To run the program write:
 
 ` $ npm start ` 
-
-or alternatively:
-
-` electron . `
 
 In your project directory in cmd/powershell for Windows and terminal for Linux.

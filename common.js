@@ -28,10 +28,6 @@ function cryptocurrencyScreen(){
 
 function timeseriesScreen(){
 
-    $.get('/',function(data){
-        console.log('this is what came back: ' + data);
-    });
-
     $("body").css('background-color','#696969');
 
     var time_series = new Object();
@@ -135,8 +131,8 @@ function timeseriesScreen(){
                     y: y1,
                     mode: 'lines+markers',
                     marker: {
-                      color: 'rgb(217, 157, 255)',
-                      size: 5
+                      color: 'rgb(134, 193, 123)',
+                      size: 7
                     },
                     line: {
                         color: 'rgb(231, 99, 250)',
