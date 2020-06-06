@@ -9,7 +9,7 @@ $(document).ready(function(){
     $("body").css('background-color','#FFFCFC');
 });
 
-ipcRenderer.on('action-hide-window', (event,args) =>{
+ipcRenderer.on('action-hide-window', (event,args) => {
     Plotly.newPlot('graphPlot', args,layout);
 });
 
