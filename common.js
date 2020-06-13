@@ -11,18 +11,18 @@ $(document).ready(function(){
 });
 
 function forexScreen(){
-   var Forex = new Object();
-   Forex.function = $('#forexFunction').val();
+   var forex = new Object();
+   forex.function = $('#forexFunction').val();
    $("#forexFunction").on("change", function(){
-        Forex.function = $(this).val();
+        forex.function = $(this).val();
    });
 }
 
 function cryptocurrencyScreen(){
-    var Cryptocurrency = new Object();
-    Cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+    var cryptocurrency = new Object();
+    cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
     $("#cryptocurrencyFunction").on("change", function(){
-        Cryptocurrency.function = $(this).val();
+        cryptocurrency.function = $(this).val();
     });
 }
 
@@ -32,7 +32,6 @@ function timeseriesScreen(){
 
     var time_series = new Object();
   
-
     time_series.function = $("#stockFunction").val();
     time_series.symbol = $("#symbolSearchList").val();  
     time_series.interval = $("#intervalStocks").val();
@@ -112,10 +111,10 @@ function timeseriesScreen(){
 
         $.get(mainTimeSeriesURL ,function(data){
             var date = [];
-            var close = [];
-            var open = [];
-            var high = [];
-            var low = [];
+            var close1 = [];
+            var open1 = [];
+            var high1 = [];
+            var low1 = [];
 
             var counter = 0;
 
@@ -123,10 +122,10 @@ function timeseriesScreen(){
                 // SKIPPING METADATA KINDA HACKY but whatever
                 if(counter > 0 ){
                     for(var key2 in data[key]){
-                        close.push(data[key][key2]['4. close']);
-                        open.push(data[key][key2]['1. open']);
-                        high.push(data[key][key2]['2. high']);
-                        low.push(data[key][key2]['3. low']);
+                        close1.push(data[key][key2]['4. close']);
+                        open1.push(data[key][key2]['1. open']);
+                        high1.push(data[key][key2]['2. high']);
+                        low1.push(data[key][key2]['3. low']);
                         date.push(key2);
                     }
                 }
@@ -136,18 +135,15 @@ function timeseriesScreen(){
                 {
                     type: 'candlestick',
                     x: date,
-                    close: close,
-                    open: open,
-                    high: high,
-                    low: low,
-
+                    close: close1,
+                    open: open1,
+                    high: high1,
+                    low: low1,
                     xaxis: 'x',
                     yaxis:  'y',
-
                     increasing: {line: {color: 'black'}},
                     decreasing: {line: {color: 'red'}},
-
-                    
+                    line: {color: 'rgba(31,119,180,1)'}
                 }
             ];
 
