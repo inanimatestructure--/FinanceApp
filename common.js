@@ -111,33 +111,43 @@ function timeseriesScreen(){
         }
 
         $.get(mainTimeSeriesURL ,function(data){
-            var x1 = [];
-            var y1 = [];
+            var date = [];
+            var close = [];
+            var open = [];
+            var high = [];
+            var low = [];
+
             var counter = 0;
 
             for(var key in data){
                 // SKIPPING METADATA KINDA HACKY but whatever
                 if(counter > 0 ){
                     for(var key2 in data[key]){
-                        y1.push(data[key][key2]['4. close']);
-                        x1.push(key2);
+                        close.push(data[key][key2]['4. close']);
+                        open.push(data[key][key2]['1. open']);
+                        high.push(data[key][key2]['2. high']);
+                        low.push(data[key][key2]['3. low']);
+                        date.push(key2);
                     }
                 }
                 counter++;
             }
             stockData = [
                 {
-                    x: x1,
-                    y: y1,
-                    mode: 'lines+markers',
-                    marker: {
-                      color: 'rgb(134, 193, 123)',
-                      size: 7
-                    },
-                    line: {
-                        color: 'rgb(231, 99, 250)',
-                        width: 2
-                      }
+                    type: 'candlestick',
+                    x: date,
+                    close: close,
+                    open: open,
+                    high: high,
+                    low: low,
+
+                    xaxis: 'x',
+                    yaxis:  'y',
+
+                    increasing: {line: {color: 'black'}},
+                    decreasing: {line: {color: 'red'}},
+
+                    
                 }
             ];
 

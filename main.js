@@ -3,14 +3,19 @@ var layout;
 
 $(document).ready(function(){
     layout = {
-        plot_bgcolor:"black",
-        paper_bgcolor:"#FFFCCC",
+        dragmode: 'zoom',
+        showlegend: false,
+        xaxis: {
+          rangeslider: {
+               visible: false
+           }
+        }
     };
-    $("body").css('background-color','#FFFCFC');
+    $("body").css('background-color','#AAFCFC');
 });
 
 ipcRenderer.on('action-hide-window', (event,args) => {
-    Plotly.newPlot('graphPlot', args,layout);
+    Plotly.newPlot('graphPlot',args,layout);
 });
 
 ipcRenderer.on('action-global', (event,args) => {
