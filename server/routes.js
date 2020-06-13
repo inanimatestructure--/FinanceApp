@@ -11,6 +11,12 @@ app.listen(port, () => {
    console.log("Server running on port 3000");
 });
 
+
+/***  
+ * 
+ * TIME SERIES ROUTES
+ *
+ * **/
 app.get('/api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', function(req,res){
    var func = req.params.function;
    var symbol = req.params.symbol;
@@ -51,6 +57,44 @@ app.get('/api/v1/symbol/:symbol', function(req,res){
    var symbol = req.params.symbol;
    var globalQuoteURL = alphaStartUrl + "function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + config; 
    request(globalQuoteURL, function(error,response,body){
+      var data = JSON.parse(body);
+      res.send(data);
+   });
+});
+
+/**
+ * 
+ * TIME SERIES ROUTES
+ */
+
+ /**
+  * 
+  * CRYPTOCURRENCY ROUTES
+  */
+
+app.get('api/v1/cryptocurrency/:function/:symbol/:exchange', function(req,res){
+   var symbol = req.params.symbol;
+   var exchange = req.params.exchange; 
+   var cryptoURL = "";
+   if(req.params.function == "DIGITAL_CURRENCY_DAILY"){
+      cryptoURL =  alphaStartUrl + "function=DIGITAL_CURRENCY_DAILY&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
+   }
+   else if(req.params.function == "DIGITAL_CURRENCY_WEEKLY"){
+      cryptoURL =  alphaStartUrl + "function=DIGITAL_CURRENCY_WEEKLY&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
+   }
+   else if(req.params.function == "DIGITAL_CURRENCY_MONTHLY"){
+      cryptoURL =  alphaStartUrl + "function=DIGITAL_CURRENCY_MONTHLY&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
+   }
+   request(cryptoURL,function(error,response,body){
+      var data = JSON.parse(body);
+      res.send(data);
+   });
+});
+
+app.get('api/v1/cryptocurrency/health/:symbol/:exchange', function(req,res){
+   var symbol = req.params.symbol;
+   var cryptohealthURL =  alphaStartUrl + "function=CRYPTO_RATING&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
+   request('',function(error,response,body){
       var data = JSON.parse(body);
       res.send(data);
    });

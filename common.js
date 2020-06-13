@@ -21,6 +21,7 @@ function forexScreen(){
 function cryptocurrencyScreen(){
     var cryptocurrency = new Object();
     cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+    
     $("#cryptocurrencyFunction").on("change", function(){
         cryptocurrency.function = $(this).val();
     });
