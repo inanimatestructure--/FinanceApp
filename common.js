@@ -21,10 +21,12 @@ function forexScreen(){
 function cryptocurrencyScreen(){
     var cryptocurrency = new Object();
     cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
-    
+
     $("#cryptocurrencyFunction").on("change", function(){
         cryptocurrency.function = $(this).val();
     });
+
+
 }
 
 function timeseriesScreen(){
@@ -142,7 +144,7 @@ function timeseriesScreen(){
                     low: low1,
                     xaxis: 'x',
                     yaxis:  'y',
-                    increasing: {line: {color: 'black'}},
+                    increasing: {line: {color: 'green'}},
                     decreasing: {line: {color: 'red'}},
                     line: {color: 'rgba(31,119,180,1)'}
                 }
