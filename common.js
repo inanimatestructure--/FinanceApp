@@ -10,14 +10,6 @@ $(document).ready(function(){
     //cryptocurrencyScreen();
 });
 
-function forexScreen(){
-   var forex = new Object();
-   forex.function = $('#forexFunction').val();
-   $("#forexFunction").on("change", function(){
-        forex.function = $(this).val();
-   });
-}
-
 function cryptocurrencyScreen(){
     var cryptocurrency = new Object();
     cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
