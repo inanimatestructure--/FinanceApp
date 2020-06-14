@@ -11,19 +11,22 @@ $(document).ready(function(){
 });
 
 function forexScreen(){
-   var Forex = new Object();
-   Forex.function = $('#forexFunction').val();
+   var forex = new Object();
+   forex.function = $('#forexFunction').val();
    $("#forexFunction").on("change", function(){
-        Forex.function = $(this).val();
+        forex.function = $(this).val();
    });
 }
 
 function cryptocurrencyScreen(){
-    var Cryptocurrency = new Object();
-    Cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+    var cryptocurrency = new Object();
+    cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+
     $("#cryptocurrencyFunction").on("change", function(){
-        Cryptocurrency.function = $(this).val();
+        cryptocurrency.function = $(this).val();
     });
+
+
 }
 
 function timeseriesScreen(){
@@ -32,7 +35,6 @@ function timeseriesScreen(){
 
     var time_series = new Object();
   
-
     time_series.function = $("#stockFunction").val();
     time_series.symbol = $("#symbolSearchList").val();  
     time_series.interval = $("#intervalStocks").val();
@@ -111,33 +113,40 @@ function timeseriesScreen(){
         }
 
         $.get(mainTimeSeriesURL ,function(data){
-            var x1 = [];
-            var y1 = [];
+            var date = [];
+            var close1 = [];
+            var open1 = [];
+            var high1 = [];
+            var low1 = [];
+
             var counter = 0;
 
             for(var key in data){
                 // SKIPPING METADATA KINDA HACKY but whatever
                 if(counter > 0 ){
                     for(var key2 in data[key]){
-                        y1.push(data[key][key2]['4. close']);
-                        x1.push(key2);
+                        close1.push(data[key][key2]['4. close']);
+                        open1.push(data[key][key2]['1. open']);
+                        high1.push(data[key][key2]['2. high']);
+                        low1.push(data[key][key2]['3. low']);
+                        date.push(key2);
                     }
                 }
                 counter++;
             }
             stockData = [
                 {
-                    x: x1,
-                    y: y1,
-                    mode: 'lines+markers',
-                    marker: {
-                      color: 'rgb(134, 193, 123)',
-                      size: 7
-                    },
-                    line: {
-                        color: 'rgb(231, 99, 250)',
-                        width: 2
-                      }
+                    type: 'candlestick',
+                    x: date,
+                    close: close1,
+                    open: open1,
+                    high: high1,
+                    low: low1,
+                    xaxis: 'x',
+                    yaxis:  'y',
+                    increasing: {line: {color: 'green'}},
+                    decreasing: {line: {color: 'red'}},
+                    line: {color: 'rgba(31,119,180,1)'}
                 }
             ];
 

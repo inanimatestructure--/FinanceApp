@@ -7,7 +7,6 @@ const {app, BrowserWindow, ipcMain, Menu} = electron;
 
 let main
 let stock
-let forex
 let cryptocurrency
 
 // LISTEN FOR APP TO BE READY
@@ -15,7 +14,6 @@ app.on('ready', function(){
     
     main = mainWindow();
     stock = stockWindow();
-    forex = forexWindow();
     cryptocurrency = cryptocurrencyWindow();
 
     ipcMain.on('hide-stock-window',(event,args) => {
@@ -56,9 +54,6 @@ function mainWindow(){
         },
     });
     
-    main.on('close',event => {
-        mainWindow = null;
-    });
     // LOAD HTML INTO WINDOW
 
     main.loadURL(url.format({
@@ -66,6 +61,10 @@ function mainWindow(){
         protocol: 'file:',
         slashes: true
     }));
+
+    main.on('close', function(e){ 
+        app.quit();
+    });
 
     main.webContents.openDevTools();
     
@@ -91,37 +90,15 @@ function cryptocurrencyWindow(){
         slashes: true
     }));
 
+    cryptocurrency.on('close', function (e) { 
+        e.preventDefault();
+        cryptocurrency.hide();
+    });
+
     cryptocurrency.webContents.openDevTools();
 
     
     return cryptocurrency;
-}
-
-function forexWindow(){
-    forex = new BrowserWindow({      
-        width: 400,
-        height: 400,
-        autoHideMenuBar: true,
-        title: 'Forex',
-        show: false,
-        webPreferences: {
-            nativeWindowOpen: true,
-            nodeIntegration: true
- 
-        },
-
-    });
-
-    forex.loadURL(url.format({
-        pathname: path.join(__dirname, 'html/forex.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-    forex.webContents.openDevTools();
-    
-    return forex;
-
 }
 
 function stockWindow(){
@@ -129,6 +106,7 @@ function stockWindow(){
         width: 400, 
         height: 400,
         autoHideMenuBar: true,
+        parent: main,
         title: 'Stocks',
         show: false,
         webPreferences: {
@@ -142,6 +120,13 @@ function stockWindow(){
         protocol: 'file:',
         slashes: true
     }));
+    
+    stock.on('close', function (e) { 
+        e.preventDefault();
+        stock.hide();
+    });
+
+    stock.webContents.openDevTools();
 
     return stock;
 }
@@ -155,10 +140,6 @@ const mainMenuTemplate = [
             {
                 label: 'Stocks',
                 click(){ stock.show(); }
-            },
-            {
-                label: 'Forex',
-                click(){ forex.show(); }
             },
             {
                 label: 'Cryptocurrency',
