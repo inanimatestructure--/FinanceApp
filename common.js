@@ -1,5 +1,6 @@
 var config = "";
 var stockData = [];
+var cryptoData = [];
 var change;
 const ipPort = "http://localhost:3000/";
 const {ipcRenderer} = require('electron');
@@ -13,16 +14,34 @@ $(document).ready(function(){
 function cryptocurrencyScreen(){
     var cryptocurrency = new Object();
     cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+    cryptocurrency.symbol = $('.cryptoSymbolList').val();
+    cryptocurrency.code = $('.marketCurrencyCode').val();
 
     $("#cryptocurrencyFunction").on("change", function(){
         cryptocurrency.function = $(this).val();
     });
 
+    $(".cryptoSymbolList").on("change", function(){
+        cryptocurrency.symbol = $(this).val();
+    });
+    
+    $(".marketCurrencyCode").on("change", function(data){
+        cryptocurrency.code = $(this).val();
+    });
+
+    $('.cryptoevent').click(function(){
+        ipcRenderer.send('crypto-window', cryptoData);
+    });
+
+    $('.submit').click(function(){
+        
+    });
 
 }
 
 function timeseriesScreen(){
 
+    // Tee-hee
     $("body").css('background-color','#696969');
 
     var time_series = new Object();
