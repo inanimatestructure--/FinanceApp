@@ -4,7 +4,7 @@ var app = express();
 const request = require('request');
 const port = 3000;
 
-const config = "2KZ9MV9TBQDE4YRY";
+const config = "<YOUR_API_KEY_HERE>";
 const alphaStartUrl = "https://www.alphavantage.co/query?";
 
 app.listen(port, () => {

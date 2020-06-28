@@ -34,15 +34,19 @@ function cryptocurrencyScreen(){
     });
 
     $('.submit').click(function(){
-        
+        if($("#cryptocurrencyFunction").val() == "api/v1/cryptocurrency/:function/:symbol/:exchange"){
+            mainCryptocurrencyURL = ipPort + "api/v1/cryptocurrency/" + cryptocurrency.function + "/" + cryptocurrency.symbol + "/" + cryptocurrency.code;
+        }
+        else{
+            mainCryptoCurrencyURL = ipPort + "api/v1/cryptocurrency/" + cryptocurrency.function + "/" + cryptocurrency.symbol + + cryptocurrency.datatype;
+        }
     });
 
 }
 
 function timeseriesScreen(){
 
-    // Tee-hee
-    $("body").css('background-color','#696969');
+    $("body").css('background-color','#f49999');
 
     var time_series = new Object();
   
