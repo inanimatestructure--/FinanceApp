@@ -30,3 +30,7 @@ ipcRenderer.on('action-global', (event,args) => {
     }
 });
 
+ipcRenderer.on('action-crypto', (event, args) => {
+    Plotly.newPlot('graphPlot',args,layout);
+});
+

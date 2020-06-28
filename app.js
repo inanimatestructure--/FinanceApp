@@ -24,6 +24,10 @@ app.on('ready', function(){
         main.webContents.send('action-global',args);
     });
 
+    ipcMain.on('crypto-window',(event,args) => {
+        main.webContents.send('action-crypto', args);
+    });
+
     // BUILD MENU FROM TEMPLATE
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 	
