@@ -10,58 +10,30 @@ $(document).ready(function(){
     cryptocurrencyScreen();
 });
 
-function cryptocurrencyScreen(){
-    var cryptocurrency = new Object();
-    cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
-    cryptocurrency.symbol = $('.cryptoSymbolList').val();
-    cryptocurrency.code = $('.marketCurrencyCode').val();
+function callAlpha(url, open, close, high, low, event, value){
+    $.get(url, function(data){
+        var date = [];
+        var close1 = [];
+        var open1 = [];
+        var high1 = [];
+        var low1 = [];
 
-    $("#cryptocurrencyFunction").on("change", function(){
-        cryptocurrency.function = $(this).val();
-    });
+        var counter = 0;
 
-    $(".cryptoSymbolList").on("change", function(){
-        cryptocurrency.symbol = $(this).val();
-    });
-    
-    $(".marketCurrencyCode").on("change", function(data){
-        cryptocurrency.code = $(this).val();
-    });
-
-    $('.cryptoevent').click(function(){
-        ipcRenderer.send('crypto-window', cryptoData);
-    });
-
-    $('.submit').click(function(){
-        if($("#cryptocurrencyFunction").val() == "api/v1/cryptocurrency/:function/:symbol/:exchange"){
-            mainCryptocurrencyURL = ipPort + "api/v1/cryptocurrency/" + cryptocurrency.function + "/" + cryptocurrency.symbol + "/" + cryptocurrency.code;
-        }
-        else{
-            mainCryptoCurrencyURL = ipPort + "api/v1/cryptocurrency/health/" + cryptocurrency.function + "/" + cryptocurrency.symbol;
-        }
-
-        $.get(mainCryptoCurrencyURL ,function(data){
-            var date = [];
-            var close1 = [];
-            var open1 = [];
-            var high1 = [];
-            var low1 = [];
-
-            var counter = 0;
-
-            for(var key in data){
-                // SKIPPING METADATA KINDA HACKY but whatever
-                if(counter > 0 ){
-                    for(var key2 in data[key]){
-                        close1.push(data[key][key2]['4a. close (' + cryptocurrency.code + ')']);
-                        open1.push(data[key][key2]['1a. open (' + cryptocurrency.code + ')']);
-                        high1.push(data[key][key2]['2a. high (' + cryptocurrency.code + ')']);
-                        low1.push(data[key][key2]['3a. low (' + cryptocurrency.code + ')']);
-                        date.push(key2);
-                    }
+        for(var key in data){                
+            if(counter > 0 ){
+                for(var key2 in data[key]){
+                    close1.push(data[key][key2][close]);
+                    open1.push(data[key][key2][open]);
+                    high1.push(data[key][key2][high]);
+                    low1.push(data[key][key2][low]);
+                    date.push(key2);
                 }
-                counter++;
             }
+            counter++;
+        }
+
+        if(value == 'crypto'){
             cryptoData = [
                 {
                     type: 'candlestick',
@@ -77,9 +49,67 @@ function cryptocurrencyScreen(){
                     line: {color: 'rgba(31,119,180,1)'}
                 }
             ];
+        }
+        else if(value == 'stock') {
+            stockData = [
+                {
+                    type: 'candlestick',
+                    x: date,
+                    close: close1,
+                    open: open1,
+                    high: high1,
+                    low: low1,
+                    xaxis: 'x',
+                    yaxis:  'y',
+                    increasing: {line: {color: 'green'}},
+                    decreasing: {line: {color: 'red'}},
+                    line: {color: 'rgba(31,119,180,1)'}
+                }
+            ];
+        }
 
-            $('.cryptoevent').trigger('click');
-        });
+        $(event).trigger('click');
+    });
+}
+
+function cryptocurrencyScreen(){
+    var cryptocurrency = new Object();
+    var mainCryptoCurrencyURL = "";
+    cryptocurrency.function = $('#cryptocurrencyFunction').val(); 
+    cryptocurrency.symbol = $('.cryptoSymbolList').val();
+    cryptocurrency.code = $('.marketCurrencyCode').val();
+
+    $("#cryptocurrencyFunction").on("change", function(){
+        cryptocurrency.function = $(this).val();
+    });
+
+    $(".cryptoSymbol").on("change", function(){
+        cryptocurrency.symbol = $(this).val();
+    });
+    
+    $(".marketCurrencyCode").on("change", function(data){
+        cryptocurrency.code = $(this).val();
+    });
+
+    $('.cryptoevent').click(function(){
+        ipcRenderer.send('crypto-window', cryptoData);
+    });
+
+    $('.submitCrypto').click(function(){
+        console.log($("#cryptocurrencyFunction").val());
+        if($("#cryptocurrencyFunction").val() != "CRYPTO_RATING"){
+            mainCryptoCurrencyURL = ipPort + "api/v1/cryptocurrency/" + cryptocurrency.function + "/" + cryptocurrency.symbol + "/" + cryptocurrency.code;
+        }
+        else{
+            mainCryptoCurrencyURL = ipPort + "api/v1/cryptocurrency/health/" + cryptocurrency.symbol;
+        }
+        var open ='1a. open (' + cryptocurrency.code +')';
+        var high = '2a. high (' + cryptocurrency.code +')';
+        var low ='3a. low (' + cryptocurrency.code +')';
+        var close ='4a. close (' + cryptocurrency.code +')';
+        var event = '.cryptoevent';
+
+        callAlpha(mainCryptoCurrencyURL,open,close,high,low,event,'crypto');
     });
 
 }
@@ -156,7 +186,7 @@ function timeseriesScreen(){
         });
     });
 
-    $(".submit").click(function(e){
+    $(".submitStocks").click(function(e){
         if($("#stockFunction").val() == "TIME_SERIES_INTRADAY"){
             mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/" + time_series.interval + "/" + time_series.outputsize + "/" + time_series.datatype;
         }
@@ -167,46 +197,12 @@ function timeseriesScreen(){
             mainTimeSeriesURL = ipPort + "api/v1/timeseries/" + time_series.function + "/" + time_series.symbol + "/null/null/" + time_series.datatype;
         }
 
-        $.get(mainTimeSeriesURL ,function(data){
-            var date = [];
-            var close1 = [];
-            var open1 = [];
-            var high1 = [];
-            var low1 = [];
-
-            var counter = 0;
-
-            for(var key in data){
-                // SKIPPING METADATA KINDA HACKY but whatever
-                if(counter > 0 ){
-                    for(var key2 in data[key]){
-                        close1.push(data[key][key2]['4. close']);
-                        open1.push(data[key][key2]['1. open']);
-                        high1.push(data[key][key2]['2. high']);
-                        low1.push(data[key][key2]['3. low']);
-                        date.push(key2);
-                    }
-                }
-                counter++;
-            }
-            stockData = [
-                {
-                    type: 'candlestick',
-                    x: date,
-                    close: close1,
-                    open: open1,
-                    high: high1,
-                    low: low1,
-                    xaxis: 'x',
-                    yaxis:  'y',
-                    increasing: {line: {color: 'green'}},
-                    decreasing: {line: {color: 'red'}},
-                    line: {color: 'rgba(31,119,180,1)'}
-                }
-            ];
-
-            $('.event').trigger('click');
-        });
+        var close = '4. close';
+        var open = '1. open';
+        var high = '2. high';
+        var low = '3. low';
+        var event = '.event';
+        callAlpha(mainTimeSeriesURL, open, close, high, low,event, 'stock');
     });    
 
 } 
