@@ -70,7 +70,7 @@ function mainWindow(){
         app.quit();
     });
 
-    main.webContents.openDevTools();
+    // main.webContents.openDevTools();
     
     return main;
 }
@@ -99,7 +99,7 @@ function cryptocurrencyWindow(){
         cryptocurrency.hide();
     });
 
-    cryptocurrency.webContents.openDevTools();
+    // cryptocurrency.webContents.openDevTools();
 
     
     return cryptocurrency;
@@ -130,7 +130,7 @@ function stockWindow(){
         stock.hide();
     });
 
-    stock.webContents.openDevTools();
+    // stock.webContents.openDevTools();
 
     return stock;
 }

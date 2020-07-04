@@ -72,18 +72,18 @@ app.get('/api/v1/symbol/:symbol', function(req,res){
   * CRYPTOCURRENCY ROUTES
   */
 
-app.get('api/v1/cryptocurrency/:function/:symbol/:exchange', function(req,res){
+app.get('/api/v1/cryptocurrency/:function/:symbol/:market', function(req,res){
    var symbol = req.params.symbol;
-   var exchange = req.params.exchange; 
+   var market = req.params.market; 
    var cryptoURL = "";
    if(req.params.function == "DIGITAL_CURRENCY_DAILY"){
-      cryptoURL =  alphaStartUrl + "function=DIGITAL_CURRENCY_DAILY&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
+      cryptoURL = alphaStartUrl + "function=DIGITAL_CURRENCY_DAILY&symbol=" + symbol + "&market=" + market + "&apikey=" + config;
    }
    else if(req.params.function == "DIGITAL_CURRENCY_WEEKLY"){
-      cryptoURL =  alphaStartUrl + "function=DIGITAL_CURRENCY_WEEKLY&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
+      cryptoURL = alphaStartUrl + "function=DIGITAL_CURRENCY_WEEKLY&symbol=" + symbol + "&market=" + market + "&apikey=" + config;
    }
    else if(req.params.function == "DIGITAL_CURRENCY_MONTHLY"){
-      cryptoURL =  alphaStartUrl + "function=DIGITAL_CURRENCY_MONTHLY&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
+      cryptoURL = alphaStartUrl + "function=DIGITAL_CURRENCY_MONTHLY&symbol=" + symbol + "&market=" + market + "&apikey=" + config;
    }
    request(cryptoURL,function(error,response,body){
       var data = JSON.parse(body);
@@ -91,10 +91,10 @@ app.get('api/v1/cryptocurrency/:function/:symbol/:exchange', function(req,res){
    });
 });
 
-app.get('api/v1/cryptocurrency/health/:symbol/:exchange', function(req,res){
+app.get('/api/v1/cryptocurrency/health/:symbol', function(req,res){
    var symbol = req.params.symbol;
-   var cryptohealthURL =  alphaStartUrl + "function=CRYPTO_RATING&symbol=" + symbol + "&market=" + exchange + "&apikey=" + config;
-   request('',function(error,response,body){
+   var cryptohealthURL =  alphaStartUrl + "function=CRYPTO_RATING&symbol=" + symbol + "&apikey=" + config;
+   request(cryptohealthURL,function(error,response,body){
       var data = JSON.parse(body);
       res.send(data);
    });
