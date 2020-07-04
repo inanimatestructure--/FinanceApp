@@ -7,8 +7,7 @@ const {ipcRenderer} = require('electron');
 
 $(document).ready(function(){
     timeseriesScreen();
-    //forexScreen();
-    //cryptocurrencyScreen();
+    cryptocurrencyScreen();
 });
 
 function cryptocurrencyScreen(){
@@ -38,8 +37,49 @@ function cryptocurrencyScreen(){
             mainCryptocurrencyURL = ipPort + "api/v1/cryptocurrency/" + cryptocurrency.function + "/" + cryptocurrency.symbol + "/" + cryptocurrency.code;
         }
         else{
-            mainCryptoCurrencyURL = ipPort + "api/v1/cryptocurrency/" + cryptocurrency.function + "/" + cryptocurrency.symbol + + cryptocurrency.datatype;
+            mainCryptoCurrencyURL = ipPort + "api/v1/cryptocurrency/health/" + cryptocurrency.function + "/" + cryptocurrency.symbol;
         }
+
+        $.get(mainCryptoCurrencyURL ,function(data){
+            var date = [];
+            var close1 = [];
+            var open1 = [];
+            var high1 = [];
+            var low1 = [];
+
+            var counter = 0;
+
+            for(var key in data){
+                // SKIPPING METADATA KINDA HACKY but whatever
+                if(counter > 0 ){
+                    for(var key2 in data[key]){
+                        close1.push(data[key][key2]['4a. close (' + cryptocurrency.code + ')']);
+                        open1.push(data[key][key2]['1a. open (' + cryptocurrency.code + ')']);
+                        high1.push(data[key][key2]['2a. high (' + cryptocurrency.code + ')']);
+                        low1.push(data[key][key2]['3a. low (' + cryptocurrency.code + ')']);
+                        date.push(key2);
+                    }
+                }
+                counter++;
+            }
+            cryptoData = [
+                {
+                    type: 'candlestick',
+                    x: date,
+                    close: close1,
+                    open: open1,
+                    high: high1,
+                    low: low1,
+                    xaxis: 'x',
+                    yaxis:  'y',
+                    increasing: {line: {color: 'blue'}},
+                    decreasing: {line: {color: 'brown'}},
+                    line: {color: 'rgba(31,119,180,1)'}
+                }
+            ];
+
+            $('.cryptoevent').trigger('click');
+        });
     });
 
 }
