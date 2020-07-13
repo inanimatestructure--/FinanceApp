@@ -116,8 +116,6 @@ function cryptocurrencyScreen(){
 
 function timeseriesScreen(){
 
-    $("body").css('background-color','#f49999');
-
     var time_series = new Object();
   
     time_series.function = $("#stockFunction").val();
@@ -204,5 +202,4 @@ function timeseriesScreen(){
         var event = '.event';
         callAlpha(mainTimeSeriesURL, open, close, high, low,event, 'stock');
     });    
-
 } 

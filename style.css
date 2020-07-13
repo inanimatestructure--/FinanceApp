@@ -1,1 +1,63 @@
-/**LMAO i'm probably just gonna use bootstrap**/
+.color {
+    background-color: #003434;
+}
+
+button:hover {
+    background-color: hsl(184, 87%, 94%);
+}
+
+button {
+    color: #1D9AF2;
+    background-color: #292D3E;
+    border: 1px solid #1D9AF2;
+    border-radius: 4px;
+    padding: 0 15px;
+    cursor: pointer;
+    height:32px;
+    font-size:14px;
+    background-position: center;
+    transition: background 0.8s;
+}
+
+label {
+    font-family: Helvetica;
+    color: whitesmoke;
+}
+
+h1 {
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    font-family: Helvetica;
+    color: whitesmoke;
+    text-align: center;
+}
+
+#globalQuotes {
+    color: whitesmoke;
+    font-family: Helvetica;
+}
+
+select {
+    font: 400 16px/1.3 sans-serif;
+    -webkit-appearance: none;
+    color: yellowgreen;
+    border: 1px solid var(--baseFg);
+    line-height: 1;
+    font-family: Helvetica;
+    outline: 0;
+    padding: 0.65em 2.5em 0.55em 0.75em;
+    border-radius: var(--radius);
+    background-color: var(--baseBg);
+    background-image: linear-gradient(var(--baseFg), var(--baseFg)),
+    linear-gradient(-135deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(-225deg, transparent 50%, var(--accentBg) 50%),
+    linear-gradient(var(--accentBg) 42%, var(--accentFg) 42%);
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+    background-position: right 20px center, right bottom, right bottom, right bottom;   
+}
