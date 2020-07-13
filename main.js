@@ -11,7 +11,6 @@ $(document).ready(function(){
            }
         }
     };
-    $("body").css('background-color','#AAFCFC');
 });
 
 ipcRenderer.on('action-hide-window', (event,args) => {

@@ -4,7 +4,7 @@ var app = express();
 const request = require('request');
 const port = 3000;
 
-const config = "<YOUR_API_KEY_HERE>";
+const config = "2KZ9MV9TBQDE4YRY";
 const alphaStartUrl = "https://www.alphavantage.co/query?";
 
 app.listen(port, () => {
@@ -13,9 +13,7 @@ app.listen(port, () => {
 
 
 /***  
- * 
  * TIME SERIES ROUTES
- *
  * **/
 app.get('/api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', function(req,res){
    var func = req.params.function;
