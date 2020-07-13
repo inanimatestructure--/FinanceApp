@@ -5,7 +5,15 @@ $(document).ready(function(){
     layout = {
         dragmode: 'zoom',
         showlegend: false,
+        paper_bgcolor: "rgba(0, 52, 52, 1)",
+        plot_bgcolor: "rgba(0, 52, 52, 1)",
+        yaxis: {
+            linecolor: "white",
+            color: "white"
+        },
         xaxis: {
+          linecolor: "white",
+          color: "white",
           rangeslider: {
                visible: false
            }
