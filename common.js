@@ -92,6 +92,7 @@ function cryptocurrencyScreen(){
     });
 
     $('.cryptoevent').click(function(){
+        ipcRenderer.send('global-quote', "delete");
         ipcRenderer.send('crypto-window', cryptoData);
     });
 
@@ -110,8 +111,8 @@ function cryptocurrencyScreen(){
         var event = '.cryptoevent';
 
         callAlpha(mainCryptoCurrencyURL,open,close,high,low,event,'crypto');
+        ipcRenderer.send('change-header', cryptocurrency.symbol);
     });
-
 }
 
 function timeseriesScreen(){
@@ -125,7 +126,6 @@ function timeseriesScreen(){
     time_series.outputsize = $("#outputsizeList").val();
     
     $('#symbols').hide();
-    var alphaStartUrl = "https://www.alphavantage.co/query?";
 
     var symSearchUrl = "";
     var mainTimeSeriesURL = "";
@@ -201,5 +201,6 @@ function timeseriesScreen(){
         var low = '3. low';
         var event = '.event';
         callAlpha(mainTimeSeriesURL, open, close, high, low,event, 'stock');
+        ipcRenderer.send('change-header', time_series.symbol);
     });    
 } 

@@ -1,6 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 require('./server/routes.js');
 
 const {app, BrowserWindow, ipcMain, Menu} = electron;
@@ -20,12 +21,16 @@ app.on('ready', function(){
         main.webContents.send('action-hide-window',args);
     });
     
+    ipcMain.on('change-header', (event,args) => {
+        main.webContents.send('action-header',args);
+    });
+    
     ipcMain.on('global-quote',(event,args) => {
         main.webContents.send('action-global',args);
     });
 
     ipcMain.on('crypto-window',(event,args) => {
-        main.webContents.send('action-crypto', args);
+        main.webContents.send('action-crypto',args);
     });
 
     // BUILD MENU FROM TEMPLATE
@@ -39,7 +44,7 @@ app.on('ready', function(){
 
 app.on("window-all-closed", function() {
     if (process.platform !== "darwin") {
-      app.quit();
+        app.quit();
     }
 });
 
@@ -67,6 +72,15 @@ function mainWindow(){
     }));
 
     main.on('close', function(e){ 
+        
+        var request = new XMLHttpRequest();
+
+        request.open('GET', 'https://localhost:3000/quit', true);
+        
+        request.onload = function () {
+            console.log(this.response);
+        };
+
         app.quit();
     });
 

@@ -4,17 +4,22 @@ var app = express();
 const request = require('request');
 const port = 3000;
 
-const config = "2KZ9MV9TBQDE4YRY";
+const config = "<YOUR_APIKEY_HERE>";
 const alphaStartUrl = "https://www.alphavantage.co/query?";
 
 app.listen(port, () => {
    console.log("Server running on port 3000");
 });
 
-
 /***  
  * TIME SERIES ROUTES
  * **/
+
+app.get('/quit', function(req,res){
+   res.send('closing server...');
+   app.close();
+});
+
 app.get('/api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', function(req,res){
    var func = req.params.function;
    var symbol = req.params.symbol;
