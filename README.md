@@ -15,17 +15,21 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
  It (should) install node_modules in your directory which will be ignored by the gitignore file when you push it up (which is why it doesn't show up in master or my branch). Npm is part of the node_modules which will allow you to install the following below:
 
- Electron, jQuery and Express:
+ Electron, jQuery, XMLHttpRequest and Express:
 
 ` $ npm init ` - this is if you want to create a new package.json file and delete the previous one.
 
 ` $ npm install -g electron `
+
+` $ npm install XMLHttpRequest `
 
 ` $ npm install electron --save `
 
 ` $ npm install jQuery `
 
 ` $ npm install express --save `
+
+
 
 Plotly will just be used in a script tag from CDN.
 
