@@ -12,7 +12,7 @@
 <body class="color">
     <div class="DIGITAL_CURRENCY">
         <div class="form-group">
-            <div id="functionsCrypto">
+            <div class="row" id="functionsCrypto">
                 <label for="function">Function: </label>
                 <select class="form-control" id="cryptocurrencyFunction">
                     <option value="CRYPTO_RATING">Currency Health</option>
@@ -22,17 +22,20 @@
                 </select>
             </div>
             </br>
-            <div id="symbolsCrypto">
+            <div class="row" id="symbolsCrypto">
                 <label for="symbolSearchLabel">Symbol Search: </label> 
                 <input type="text" class="cryptoSymbol"></input></br>
             </div>
             </br>
-            <div id="currenciesCrypto">
+            <div class="row" id="currenciesCrypto">
                 <label for="market">Currency Code: </label>
                 <input type="text" class="marketCurrencyCode"></input>
             </div> 
             <input type="hidden" class="cryptoevent"/>
-            <button type="button" class="submitCrypto">Submit</button>
+            <div class="row">
+            </br>
+                <button type="button" class="submitCrypto">Submit</button>
+            </div>
         </div>
     </div>
 </body>

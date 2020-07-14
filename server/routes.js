@@ -11,10 +11,15 @@ app.listen(port, () => {
    console.log("Server running on port 3000");
 });
 
-
 /***  
  * TIME SERIES ROUTES
  * **/
+
+app.get('/quit', function(req,res){
+   res.send('closing server...');
+   app.close();
+});
+
 app.get('/api/v1/timeseries/:function/:symbol/:interval/:outputsize/:datatype', function(req,res){
    var func = req.params.function;
    var symbol = req.params.symbol;

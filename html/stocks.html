@@ -12,7 +12,7 @@
 <body class="color">
     <div class="TIME_SERIES">
         <div class="form-group">
-            <div id="functions">
+            <div class="row" id="functions">
                 <label for="function">Function: </label>
                 <select class="form-control" id="stockFunction">
                     <option value="TIME_SERIES_INTRADAY">Intraday</option>
@@ -24,30 +24,30 @@
                     <option value="TIME_SERIES_MONTHLY_ADJUSTED">Monthly Adjusted</option>
                 </select>
             </div></br>
-            <div id="divKeywords">
+            <div class="row" id="divKeywords">
                 <label for="symbolKeyboard">Keyword: </label>
                 <input type="text" class="keywords"/> 
                 <button class="keywordsearch">Search</button>
             </div></br>
-            <div id="symbols">
+            <div class="row" id="symbols">
                 <label for="symbolSearchLabel">Symbol Search: </label>
                 <select class="symbolSearchList"></select></br>
             </div></br>
-            <div id="datatype">
+            <div class="row" id="datatype">
                 <label for="dType">Data Type: </label>
                 <select class="form-control" id="dtObject">
                     <option value="json">JSON</option>
                     <option value="csv">CSV</option>
                 </select>
             </div>
-            <div id="outputsize"> 
+            <div class="row" id="outputsize"> 
                 <label for="from">Output Size: </label>
                 <select class="form-control" id="outputsizeList">
                     <option value="compact">Compact</option>
                     <option value="full">Full</option>
                 </select>
             </div></br>
-            <div id="interval">
+            <div class="row" id="interval">
                 <label for="to">Interval: </label>
                 <select class="form-control" id="intervalStocks">
                     <option value="1min">1 min</option>
@@ -57,7 +57,7 @@
                     <option value="60min">60 min</option>
                 </select>
             </div>
-            <div id="myDiv"></div>
+            <div class="row" id="myDiv"></div>
             </br>
             <input type="hidden" class="event"/>
             <button type="button" class="submitStocks">Submit</button>
