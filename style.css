@@ -7,6 +7,10 @@ button:hover {
     background-color: hsl(184, 87%, 94%);
 }
 
+.row {
+    background-color: #003440;
+}
+
 button {
     color: #1D9AF2;
     background-color: #292D3E;
@@ -45,7 +49,6 @@ h1 {
 
 select {
     font: 400 16px/1.3 sans-serif;
-    -webkit-appearance: none;
     color: yellowgreen;
     border: 1px solid var(--baseFg);
     line-height: 1;

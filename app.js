@@ -24,7 +24,7 @@ app.on('ready', function(){
     ipcMain.on('change-header', (event,args) => {
         main.webContents.send('action-header',args);
     });
-    
+
     ipcMain.on('global-quote',(event,args) => {
         main.webContents.send('action-global',args);
     });
@@ -57,7 +57,7 @@ function mainWindow(){
 //CREATE NEW WINDOW 
     main = new BrowserWindow({
         width: 1200,
-        height: 1200,
+        height: 1000,
         webPreferences: {
             nodeIntegration: true
         },
@@ -92,7 +92,7 @@ function mainWindow(){
 function cryptocurrencyWindow(){
     cryptocurrency = new BrowserWindow({      
         width: 400,
-        height: 400,
+        height: 200,
         autoHideMenuBar: true,
         title: 'Cryptocurrency',
         show: false,
@@ -122,7 +122,7 @@ function cryptocurrencyWindow(){
 function stockWindow(){
     stock = new BrowserWindow({      
         width: 400, 
-        height: 400,
+        height: 375,
         autoHideMenuBar: true,
         parent: main,
         title: 'Stocks',
