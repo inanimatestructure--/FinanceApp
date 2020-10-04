@@ -5,6 +5,12 @@ This project is designed by yours truly (:^)) to grab stock data from Alpha Vant
 
 ## Resources 
 
+First thing to do is to create an API key for Alpha Vantage:
+
+https://www.alphavantage.co/support/#api-key
+
+DO NOT push your code up with the key in the ` routes.js ` file in the server folder. Use it on your localhost only.
+
 Install NodeJS, by downloading it from their site. You'll need this to use npm but you'll never have to write something like this:
 
 ` $ node common.js  `
