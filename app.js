@@ -71,6 +71,8 @@ function mainWindow(){
         slashes: true
     }));
 
+    //IF THE MAIN WINDOW CLOSES CLOSE THE SERVER 
+
     main.on('close', function(e){ 
         
         var request = new XMLHttpRequest();
@@ -83,6 +85,8 @@ function mainWindow(){
 
         app.quit();
     });
+    
+    // UNCOMMENT THIS ONLY IF YOU  WANT TO DEBUG THE MAIN SCREEN IN THE DEVELOPER TOOLS/INSPECT ELEMENT
 
     // main.webContents.openDevTools();
     

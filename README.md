@@ -3,11 +3,13 @@
 ## Main Idea
 This project is designed by yours truly (:^)) to grab stock data from Alpha Vantage and insert it into an electron app. Ideally I'd like to have Google's Tensorflow API be able to predict stock prices using a machine learning algorithm. Now which one we should use and why might take some research but as of right now I'd like to have a fully functioning electron wrapper for the AV API. 
 
-#### 1. If there's any other way this app could be more functional/user friendly (IE placements of html or jquery/js animations) I'd love to hear some ideas. I would like to just get it functioning at this point but any kind of aesthetic change is welcome. Adding a JS framework for SPA integration is also a topic of discussion.
-
-#### 2. Add CSS which really should be the last thing. Maybe give the user an option to customize their application?
-
 ## Resources 
+
+First two things to do is to create your own branch off of master, and then create an API key for Alpha Vantage:
+
+https://www.alphavantage.co/support/#api-key
+
+DO NOT push your code up with the key in the ` routes.js ` file in the server folder. Use it on your localhost only.
 
 Install NodeJS, by downloading it from their site. You'll need this to use npm but you'll never have to write something like this:
 
@@ -23,7 +25,7 @@ In package.json add a script tag that says : ` "start" : "electron ."
 
 ` $ npm install -g electron `
 
-` $ npm install XMLHttpRequest `
+` $ npm install XMLHttpRequest ` - I don't really think this is working the way I want it to yet but keeping it here in case I find a better solution.
 
 ` $ npm install electron --save `
 
@@ -32,13 +34,19 @@ In package.json add a script tag that says : ` "start" : "electron ."
 ` $ npm install express --save `
 
 
-
 Plotly will just be used in a script tag from CDN.
 
-We're also using Tensorflow's API which I don't have yet but will at some point once the wrapper idea is complete. Happy coding. 
+We're also going to be using Tensorflow's API which I don't have yet but will at some point once the wrapper idea is complete.
 
 To run the program write:
 
 ` $ npm start ` 
 
-In your project directory in cmd/powershell for Windows and terminal for Linux.
+In your project directory in cmd/powershell for Windows and terminal for Linux/Mac.
+
+## How the JavaScript in the application works
+
+` app.js ` contains all the electron structure javascript to run the desktop application in nodejs like setting up main menus, passing data through to other windows etc.
+` main.js ` contains all the data that gets sent back and forth from various screens so it's common among all the html files.
+` common.js ` contains all the logic that triggers events on the page.
+` routes.js ` contains the expressjs REST api.
