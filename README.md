@@ -35,3 +35,10 @@ To run the program write:
 ` $ npm start ` 
 
 In your project directory in cmd/powershell for Windows and terminal for Linux/Mac.
+
+## How the JavaScript in the application works
+
+` app.js ` contains all the electron structure javascript to run the desktop application in nodejs like setting up main menus, passing data through to other windows etc.
+` main.js ` contains all the data that gets sent back and forth from various screens so it's common among all the html files.
+` common.js ` contains all the logic that triggers events on the page.
+` routes.js ` contains the expressjs REST api.
