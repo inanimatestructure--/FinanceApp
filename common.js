@@ -5,6 +5,8 @@ var change;
 const ipPort = "http://localhost:3000/";
 const {ipcRenderer} = require('electron');
 
+
+
 $(document).ready(function(){
     timeseriesScreen();
     cryptocurrencyScreen();
