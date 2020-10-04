@@ -17,7 +17,9 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
  Electron, jQuery, XMLHttpRequest and Express:
 
-` $ npm init ` - this is if you want to create a new package.json file and delete the previous one.
+` $ npm init ` - this is if you want to create a new package.json file and delete the previous one. 
+
+In package.json add a script tag that says : ` "start" : "electron ." 
 
 ` $ npm install -g electron `
 
