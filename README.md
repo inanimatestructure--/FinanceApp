@@ -5,7 +5,7 @@ This project is designed by yours truly (:^)) to grab stock data from Alpha Vant
 
 ## Resources 
 
-First thing to do is to create an API key for Alpha Vantage:
+First two things to do is to create your own branch off of master, and then create an API key for Alpha Vantage:
 
 https://www.alphavantage.co/support/#api-key
 
