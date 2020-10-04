@@ -26,13 +26,12 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 ` $ npm install express --save `
 
 
-
 Plotly will just be used in a script tag from CDN.
 
-We're also using Tensorflow's API which I don't have yet but will at some point once the wrapper idea is complete. Happy coding. 
+We're also going to be using Tensorflow's API which I don't have yet but will at some point once the wrapper idea is complete.
 
 To run the program write:
 
 ` $ npm start ` 
 
-In your project directory in cmd/powershell for Windows and terminal for Linux.
+In your project directory in cmd/powershell for Windows and terminal for Linux/Mac.
