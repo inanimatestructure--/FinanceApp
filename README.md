@@ -3,10 +3,6 @@
 ## Main Idea
 This project is designed by yours truly (:^)) to grab stock data from Alpha Vantage and insert it into an electron app. Ideally I'd like to have Google's Tensorflow API be able to predict stock prices using a machine learning algorithm. Now which one we should use and why might take some research but as of right now I'd like to have a fully functioning electron wrapper for the AV API. 
 
-#### 1. If there's any other way this app could be more functional/user friendly (IE placements of html or jquery/js animations) I'd love to hear some ideas. I would like to just get it functioning at this point but any kind of aesthetic change is welcome. Adding a JS framework for SPA integration is also a topic of discussion.
-
-#### 2. Add CSS which really should be the last thing. Maybe give the user an option to customize their application?
-
 ## Resources 
 
 Install NodeJS, by downloading it from their site. You'll need this to use npm but you'll never have to write something like this:
@@ -21,7 +17,7 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
 ` $ npm install -g electron `
 
-` $ npm install XMLHttpRequest `
+` $ npm install XMLHttpRequest ` - I don't really think this is working the way I want it to yet but keeping it here in case I find a better solution.
 
 ` $ npm install electron --save `
 
