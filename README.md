@@ -29,6 +29,8 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
 ` $ npm install jQuery `
 
+` $ npm install request `
+
 ` $ npm install express --save `
 
 
