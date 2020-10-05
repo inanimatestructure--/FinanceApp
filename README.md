@@ -31,6 +31,8 @@ In package.json add a script tag that says : ` "start" : "electron ."
 
 ` $ npm install jQuery `
 
+` $ npm install request `
+
 ` $ npm install express --save `
 
 
