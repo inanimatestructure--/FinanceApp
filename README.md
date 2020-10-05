@@ -31,7 +31,7 @@ In package.json add a script tag that says : ` "start" : "electron ."
 
 ` $ npm install electron --save `
 
-` $ npm install jquery --save `
+` $ npm install jquery `
 
 ` $ npm install express --save `
 
