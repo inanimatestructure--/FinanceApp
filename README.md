@@ -21,6 +21,8 @@ Install NodeJS, by downloading it from their site. You'll need this to use npm b
 
 ` $ npm init ` - this is if you want to create a new package.json file and delete the previous one. 
 
+Make sure that the main tag looks like this in package.json ` "main" : "app.js", `
+
 In package.json add a script tag that says : ` "start" : "electron ." 
 
 ` $ npm install -g electron `
@@ -47,6 +49,9 @@ In your project directory in cmd/powershell for Windows and terminal for Linux/M
 ## How the JavaScript in the application works
 
 ` app.js ` contains all the electron structure javascript to run the desktop application in nodejs like setting up main menus, passing data through to other windows etc.
+
 ` main.js ` contains all the data that gets sent back and forth from various screens so it's common among all the html files.
+
 ` common.js ` contains all the logic that triggers events on the page.
+
 ` routes.js ` contains the expressjs REST api.
