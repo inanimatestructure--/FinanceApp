@@ -13,6 +13,9 @@ $(document).ready(function(){
 });
 
 function callAlpha(url, open, close, high, low, event, value){
+    let stockData = [];
+    let cryptoData = [];
+
     $.get(url, function(data){
         var date = [];
         var close1 = [];
@@ -36,7 +39,7 @@ function callAlpha(url, open, close, high, low, event, value){
         }
 
         if(value == 'crypto'){
-            cryptoData = [
+            cryptoData.push([
                 {
                     type: 'candlestick',
                     x: date,
@@ -50,10 +53,10 @@ function callAlpha(url, open, close, high, low, event, value){
                     decreasing: {line: {color: 'brown'}},
                     line: {color: 'rgba(31,119,180,1)'}
                 }
-            ];
+            ]);
         }
         else if(value == 'stock') {
-            stockData = [
+            stockData.push([
                 {
                     type: 'candlestick',
                     x: date,
@@ -67,7 +70,7 @@ function callAlpha(url, open, close, high, low, event, value){
                     decreasing: {line: {color: 'red'}},
                     line: {color: 'rgba(31,119,180,1)'}
                 }
-            ];
+            ]);
         }
 
         $(event).trigger('click');
@@ -122,7 +125,8 @@ function timeseriesScreen(){
     var time_series = new Object();
   
     time_series.function = $("#stockFunction").val();
-    time_series.symbol = $("#symbolSearchList").val();  
+    time_series.symbol = [];
+    time_series.symbol.push($("#symbolSearchList").val());
     time_series.interval = $("#intervalStocks").val();
     time_series.datatype = $("#dtObject").val();
     time_series.outputsize = $("#outputsizeList").val();
@@ -146,8 +150,24 @@ function timeseriesScreen(){
     });
 
     $('.event').click(function(){
+        //setup background
         ipcRenderer.send('global-quote', change);
+        //hide window and draw graph
         ipcRenderer.send('hide-stock-window', stockData);
+    });
+
+    $("#addStockBtn").on("click",function(){
+        //calculate number of stock selections
+        let stockNum = $("#symbols").children().length + 1;
+        let newStockSelection = $("#firstStockSelectionDiv").clone();
+        newStockSelection.find("label").text(`Symbol Search For Stock ${stockNum} :`);
+        newStockSelection.find("select").data("rownumber",stockNum);
+        newStockSelection.find("select").attr("id","symbolSearchList_" + stockNum);    
+        newStockSelection.find("select").empty();
+        $("#symbols").append(newStockSelection);
+        //$("#keywords").val("");
+        //$(this).attr("disabled",true);
+
     });
 
     $('#dtObject').change(function(){
@@ -163,16 +183,21 @@ function timeseriesScreen(){
     });
 
     $('.keywordsearch').click(function(e){
-        $('.symbolSearchList').empty();
         $('#symbols').show();
+        let stockNum = $("#symbols").children().length;
+        $('#symbolSearchList_' + stockNum).empty();        
         time_series.keyword = $('.keywords').val();
        
         symSearchUrl = ipPort + 'api/v1/keywords/' + time_series.keyword;
        
         $.get(symSearchUrl,function(data){
             for(var i=0; i < data.bestMatches.length; i++){
-                $('.symbolSearchList').append('<option>' + data.bestMatches[i]['1. symbol'] + '</option>');
+                $('#symbolSearchList_' + stockNum).append('<option>' + data.bestMatches[i]['1. symbol'] + '</option>');
             }            
+            if(time_series.symbol == undefined)
+            {
+                time_series.symbol = data.bestMatches[0]['1. symbol'];
+            }
         });
     });
 

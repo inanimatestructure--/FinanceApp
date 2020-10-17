@@ -30,9 +30,14 @@
                 <button class="keywordsearch">Search</button>
             </div></br>
             <div class="row" id="symbols">
-                <label for="symbolSearchLabel">Symbol Search: </label>
-                <select class="symbolSearchList"></select></br>
+                <div id="firstStockSelectionDiv">
+                    <label for="symbolSearchLabel">Symbol Search For Stock 1: </label>
+                    <select class="symbolSearchList" id="symbolSearchList_1" data-rownumber="1"></select></br>
+                </div>
             </div></br>
+            <div class="row" id="addStockDiv">               
+                <button id="addStockBtn" class="btn btn-primary">Add Stock</button>
+            </div>            
             <div class="row" id="datatype">
                 <label for="dType">Data Type: </label>
                 <select class="form-control" id="dtObject">
